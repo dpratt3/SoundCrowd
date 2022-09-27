@@ -1,4 +1,4 @@
-# `<SoundCrowd>`
+# `SoundCrowd`
 
 ## Database Schema Design
 
