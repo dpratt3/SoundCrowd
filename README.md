@@ -2,7 +2,7 @@
 
 ## Database Schema Design
 
-`<insert database schema design here>`
+![](./dbdiagram/soundCrowd-diagram.png)
 
 ## API Documentation
 
