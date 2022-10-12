@@ -1,63 +1,63 @@
-Table users {
-  id int [pk, increment]
-  firstName varchar
-  lastName varchar
-  email varchar [not null, unique]
-  username varchar [not null, unique]
-  password varchar [not null]
+// Updated 2022-10-12
+
+Table Albums {
+id int [pk, increment, ref: < Songs.albumId]
+userId int [ref: > Users.id]
+title varchar
+description varchar
+imageUrl varchar
+createdAt timestamp
+updatedAt timestamp
 }
 
-Table artists {
-  id int [pk, increment]
-  previewImage varchar
-  totalAlbums int 
-  totalSongs int
+// If schema name is omitted, it will default to "public" schema.
+Table Users {
+id int [pk, increment, ref: < Playlists.userId]
+username varchar
+firstName varchar
+lastName varchar
+hashedPassword varchar
+email varchar
+imageUrl varchar
+createdAt timestamp
+updatedAt timestamp
 }
 
-Table songs {
-  id int [pk, increment]
-  userId int [ref: > users.id, not null]
-  albumId int  [ref: > albums.id, null]
-  title varchar [not null]
-  description varchar
-  url varchar [not null]
-  createdAt datetime
-  updatedAt datetime
-  previewImage varchar
+Table Songs {
+id int [pk, increment]
+albumId int
+userId int [ref: > Users.id]
+title varchar
+description varchar
+url varchar
+imageUrl varchar
+createdAt timestamp
+updatedAt timestamp
 }
 
-Table playlists {
-  id int [pk, increment]
-  userId int  [ref: > users.id]
-  name varchar
-  createdAt datetime
-  updatedAt datetime
-  previewImage varchar
+Table PlaylistSongs {
+id int [pk, increment]
+songId int [ref: > Songs.id]
+playlistId int
+order int
+createdAt timestamp
+updatedAt timestamp
 }
 
-// joins table
-table playlistSongs {
-  id int [pk, increment]
-  playlistId int [ref: > playlists.id]
-  songId int [ref: > songs.id]
+Table Playlists {
+id int [pk, increment, ref: < PlaylistSongs.playlistId]
+userId int
+name varchar
+imageUrl varchar
+createdAt timestamp
+updatedAt timestamp
 }
 
-table comments {
-  id int [pk, increment]
-  userId int [ref: > users.id]
-  songId int [ref: > songs.id]
-  body varchar 
-  createdAt datetime
-  updatedAt datetime
-}
-
-table albums {
-  id int [pk, increment]
-  userId int [ref: > users.id]
-  title varchar
-  description varchar
-  createdAt datetime
-  updatedAt datetime
-  previewImage varchar
-  artistId int [ref: > artists.id, not null]
+Table Comments {
+id int [pk, increment]
+songId int [ref: > Songs.id]
+userId int [ref: > Users.id]
+body varchar
+createdAt timestamp
+updatedAt timestamp
 }
