@@ -54,6 +54,30 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          userId: 3,
+          title: "Lofi Hip-Hop",
+          description: "A compilation album inspired by the YouTube channel",
+          imageUrl: "www.google.com",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 3,
+          title: "TrapCity Nation",
+          description: "The very best of the TrapCity YouTube channel",
+          imageUrl: "www.google.com",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 3,
+          title: "Focus Music",
+          description: "Music for coding",
+          imageUrl: "www.google.com",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );
@@ -74,6 +98,10 @@ module.exports = {
             "ZoomSchool Rejects",
             "Pandemic Blues",
             "2022 Overture",
+            //user 3
+            "Lofi Hip-Hop",
+            "TrapCity Nation",
+            "Focus Music",
           ],
         },
       },
