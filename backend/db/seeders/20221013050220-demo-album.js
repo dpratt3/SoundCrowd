@@ -30,6 +30,30 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          userId: 2,
+          title: "ZoomSchool Rejects",
+          description: "An album about being zoomed out during the pandemic",
+          imageUrl: "www.google.com",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 2,
+          title: "Pandemic Blues",
+          description: "America's classical music takes on the pandemic",
+          imageUrl: "www.google.com",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 2,
+          title: "2022 Overture",
+          description: "A modern echo of Tchaikovsky's 1812 overturre",
+          imageUrl: "www.google.com",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );
@@ -40,7 +64,18 @@ module.exports = {
     return queryInterface.bulkDelete(
       "Albums",
       {
-        title: { [Op.in]: ["Hello World", "Goodbye World", "Goodnight Moon"] },
+        title: {
+          [Op.in]: [
+            // user 1
+            "Hello World",
+            "Goodbye World",
+            "Goodnight Moon",
+            // user 2
+            "ZoomSchool Rejects",
+            "Pandemic Blues",
+            "2022 Overture",
+          ],
+        },
       },
       {}
     );
