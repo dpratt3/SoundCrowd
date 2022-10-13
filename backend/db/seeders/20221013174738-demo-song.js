@@ -117,10 +117,10 @@ module.exports = {
             // Album 2
             "Red",
             "Orange",
-            "Blue",
+            "Yellow",
             // Album 3
-            "Tic",
-            "Tac",
+            "Tick",
+            "Tack",
             "Toe",
           ],
         },
