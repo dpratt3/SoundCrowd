@@ -9,7 +9,7 @@ module.exports = {
         {
           userId: 1,
           title: "Hello World",
-          description: "A song about computers",
+          description: "An album about computers",
           imageUrl: "www.google.com",
           createdAt: new Date(),
           updatedAt: new Date(),
