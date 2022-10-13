@@ -4,12 +4,12 @@ const bcrypt = require("bcryptjs");
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert(
-      "Comments",
+      "Playlists",
       [
         {
-          songId: 1,
           userId: 1,
-          body: "Yesterday really made me nostalgic for the past",
+          name: "Computer songs",
+          imageUrl: "www.google.com",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -21,9 +21,9 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(
-      "Comments",
+      "Playlists",
       {
-        songId: { [Op.in]: [1] },
+        name: { [Op.in]: ["Computer songs"] },
       },
       {}
     );
