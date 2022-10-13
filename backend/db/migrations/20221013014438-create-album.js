@@ -14,6 +14,7 @@ module.exports = {
         references: {
           model: "Users",
           key: "id",
+          onDelete: "CASCADE",
         },
       },
       title: {
@@ -24,12 +25,6 @@ module.exports = {
       },
       imageUrl: {
         type: Sequelize.STRING,
-      },
-      createdAt: {
-        type: Sequelize.DATE,
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
       },
       createdAt: {
         allowNull: false,
