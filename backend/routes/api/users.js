@@ -88,23 +88,23 @@ router.get("/songs/:songId", async (req, res) => {
 });
 
 // Delete a Song (Feature 1)
-// router.delete("/songs/:songId", async (req, res) => {
-//   const primaryKey = req.params.songId;
-//   const song = await Song.findByPk(primaryKey);
-//   Song.destroy({
-//     where: {
-//       id: primaryKey,
-//     },
-//   });
+router.delete("/songs/:songId", async (req, res) => {
+  const primaryKey = req.params.songId;
+  const song = await Song.findByPk(primaryKey);
+  Song.destroy({
+    where: {
+      id: Number(primaryKey),
+    },
+  });
 
-//   // Song does not exist for provided ID
-//   if (!song) {
-//     const err = new Error("Song does not exist");
-//     err.status = 404;
-//     err.title = "Song does not exist";
-//     return res.json(err);
-//   }
-//   return res.json("Song successfully deleted");
-// });
+  // Song does not exist for provided ID
+  if (!song) {
+    const err = new Error("Song does not exist");
+    err.status = 404;
+    err.title = "Song does not exist";
+    return res.json(err);
+  }
+  return res.json("Song successfully deleted");
+});
 
 module.exports = router;
