@@ -11,10 +11,11 @@ module.exports = {
       },
       songId: {
         type: Sequelize.INTEGER,
-        references: {
-          model: "Songs",
-          key: "id",
-        },
+        // references: {
+        //   model: "Songs",
+        //   key: "id",
+        // // },
+        // onDelete: "cascade",
       },
       playlistId: {
         type: Sequelize.INTEGER,
