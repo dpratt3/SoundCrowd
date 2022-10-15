@@ -98,6 +98,16 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          albumId: 3,
+          userId: 3,
+          title: "Yesterday 111",
+          description: "A song about the past 1",
+          url: "www.yesterday1.com",
+          imageUrl: "www.google1.com",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );
