@@ -28,7 +28,7 @@
 const express = require("express");
 
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
-const { User } = require("../../db/models");
+const { User, Song, Album } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
@@ -74,6 +74,12 @@ router.post("/", validateSignup, async (req, res) => {
   return res.json({
     user,
   });
+});
+
+router.get("/songs", async (req, res) => {
+  const songs = await Song.findAll();
+  console.log(songs);
+  return res.json(songs);
 });
 
 module.exports = router;
