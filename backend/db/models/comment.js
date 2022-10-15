@@ -10,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Comment.belongsTo(models.User, { foreignKey: "userId" });
-      Comment.belongsTo(models.Song, {
-        foreignKey: "songId",
-        onDelete: "cascade",
-      });
+      // Comment.belongsTo(models.Song, {
+      //   foreignKey: "songId",
+      //   onDelete: "cascade",
+      // });
     }
   }
   Comment.init(
