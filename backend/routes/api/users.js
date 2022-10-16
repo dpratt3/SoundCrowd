@@ -56,13 +56,13 @@ const validateSignup = [
 // Sign up
 router.post("/", validateSignup, async (req, res) => {
   const { firstName, lastName, email, password, username } = req.body;
-  console.log(firstName);
+
   const doubledEmail = await User.findOne({
     where: { email },
   });
 
   if (doubledEmail) {
-    res.json({
+    return res.json({
       message: "User already exists",
       statusCode: 403,
       errors: {
@@ -70,6 +70,7 @@ router.post("/", validateSignup, async (req, res) => {
       },
     });
   }
+
   const user = await User.signup({
     firstName,
     lastName,
@@ -77,6 +78,7 @@ router.post("/", validateSignup, async (req, res) => {
     username,
     password,
   });
+
   const userObj = user.toJSON();
   const token = await setTokenCookie(res, user);
   userObj.token = token;
