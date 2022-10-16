@@ -70,24 +70,20 @@ router.post("/", validateSignup, async (req, res) => {
       },
     });
   }
-  const user = await User.signup({ email, username, password });
-  await setTokenCookie(res, user);
+  const user = await User.signup({
+    firstName,
+    lastName,
+    email,
+    username,
+    password,
+  });
+  const userObj = user.toJSON();
+  const token = await setTokenCookie(res, user);
+  userObj.token = token;
 
   return res.json({
     userObj,
   });
-});
-
-router.get("/songs", async (req, res) => {
-  const songs = await Song.findAll();
-  console.log(songs);
-  return res.json(songs);
-});
-
-router.get("/songs", async (req, res) => {
-  const songs = await Song.findAll();
-  console.log(songs);
-  return res.json(songs);
 });
 
 module.exports = router;
