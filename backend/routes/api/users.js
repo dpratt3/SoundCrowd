@@ -39,6 +39,8 @@ const validateSignup = [
     .exists({ checkFalsy: true })
     .isEmail()
     .withMessage("Please provide a valid email."),
+  check("firstName").exists().withMessage("Please provide a valid first name."),
+  check("lastName").exists().withMessage("Please provide a valid last name."),
   check("username")
     .exists({ checkFalsy: true })
     .isLength({ min: 4 })
@@ -53,8 +55,8 @@ const validateSignup = [
 
 // Sign up
 router.post("/", validateSignup, async (req, res) => {
-  const { email, password, username } = req.body;
-
+  const { firstName, lastName, email, password, username } = req.body;
+  console.log(firstName);
   const doubledEmail = await User.findOne({
     where: { email },
   });
@@ -68,7 +70,16 @@ router.post("/", validateSignup, async (req, res) => {
       },
     });
   }
-  const user = await User.signup({ email, username, password });
+  const user = await User.signup({
+    firstName,
+    lastName,
+    username,
+    email,
+    password,
+  });
+
+  console.log(user, "<---------------------------------------");
+
   await setTokenCookie(res, user);
 
   return res.json({
