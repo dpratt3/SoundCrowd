@@ -68,6 +68,13 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          songId: 10,
+          userId: 3,
+          body: "Toe really made me nostalgic for the past",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );

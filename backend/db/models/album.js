@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Album.hasMany(models.Song, {
         foreignKey: "albumId",
-        onDelete: "cascade",
+        onDelete: "CASCADE",
+        hooks: true,
       });
       Album.belongsTo(models.User, {
         foreignKey: "userId",

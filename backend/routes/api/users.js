@@ -27,12 +27,8 @@
 
 const express = require("express");
 
-const {
-  setTokenCookie,
-  requireAuth,
-  restoreUser,
-} = require("../../utils/auth");
-const { User } = require("../../db/models");
+const { setTokenCookie, requireAuth } = require("../../utils/auth");
+const { User, Song, Album } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
@@ -43,6 +39,8 @@ const validateSignup = [
     .exists({ checkFalsy: true })
     .isEmail()
     .withMessage("Please provide a valid email."),
+  check("firstName").exists().withMessage("Please provide a valid first name."),
+  check("lastName").exists().withMessage("Please provide a valid last name."),
   check("username")
     .exists({ checkFalsy: true })
     .isLength({ min: 4 })
@@ -57,8 +55,8 @@ const validateSignup = [
 
 // Sign up
 router.post("/", validateSignup, async (req, res) => {
-  const { email, password, username } = req.body;
-
+  const { firstName, lastName, email, password, username } = req.body;
+  console.log(firstName);
   const doubledEmail = await User.findOne({
     where: { email },
   });
@@ -73,13 +71,23 @@ router.post("/", validateSignup, async (req, res) => {
     });
   }
   const user = await User.signup({ email, username, password });
-  const userObj = user.toJSON();
-  const token = await setTokenCookie(res, user);
-  userObj.token = token;
+  await setTokenCookie(res, user);
 
   return res.json({
     userObj,
   });
+});
+
+router.get("/songs", async (req, res) => {
+  const songs = await Song.findAll();
+  console.log(songs);
+  return res.json(songs);
+});
+
+router.get("/songs", async (req, res) => {
+  const songs = await Song.findAll();
+  console.log(songs);
+  return res.json(songs);
 });
 
 module.exports = router;
