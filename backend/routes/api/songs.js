@@ -7,6 +7,20 @@ const { handleValidationErrors } = require("../../utils/validation");
 
 const router = express.Router();
 
+// Get all Songs created by the Current User
+router.get("/current", requireAuth, async (req, res) => {
+  const { user } = req;
+  const id = user.id;
+
+  const userSongs = await Song.findAll({
+    where: {
+      userId: id,
+    },
+  });
+  console.log(userSongs);
+  return res.json(userSongs);
+});
+
 // Get all Songs (Feature 1)
 router.get("/", async (req, res) => {
   const songs = await Song.findAll();
@@ -32,14 +46,22 @@ router.get("/:songId", async (req, res) => {
 });
 
 // Delete a Song (Feature 1)
-router.delete("/:songId", async (req, res) => {
+router.delete("/:songId", requireAuth, async (req, res) => {
+  const { user } = req;
+  const currentUserId = user.id;
+  //console.log("Song id...................................", id);
   const primaryKey = req.params.songId;
   const song = await Song.findByPk(primaryKey);
-  Song.destroy({
-    where: {
-      id: Number(primaryKey),
-    },
-  });
+  console.log("song.userId....................", song.userId, currentUserId);
+  // Delete only if current user id equals songId
+  if (song.userId === currentUserId) {
+    Song.destroy({
+      where: {
+        id: Number(primaryKey),
+      },
+    });
+    return res.json("Song successfully deleted");
+  }
 
   // Song does not exist for provided ID
   if (!song) {
@@ -48,7 +70,6 @@ router.delete("/:songId", async (req, res) => {
     err.title = "Song does not exist";
     return res.json(err);
   }
-  return res.json("Song successfully deleted");
 });
 
 module.exports = router;
