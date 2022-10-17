@@ -7,6 +7,20 @@ const { handleValidationErrors } = require("../../utils/validation");
 
 const router = express.Router();
 
+// Get all Songs created by the Current User
+router.get("/current", requireAuth, async (req, res) => {
+  const { user } = req;
+  const id = user.id;
+
+  const userSongs = await Song.findAll({
+    where: {
+      userId: id,
+    },
+  });
+  console.log(userSongs);
+  return res.json(userSongs);
+});
+
 // Get all Songs (Feature 1)
 router.get("/", async (req, res) => {
   const songs = await Song.findAll();
