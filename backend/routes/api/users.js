@@ -56,13 +56,14 @@ const validateSignup = [
 // Sign up
 router.post("/", validateSignup, async (req, res) => {
   const { firstName, lastName, email, password, username } = req.body;
-  console.log(firstName);
+
+  // Error response: User already exists with the specified email
   const doubledEmail = await User.findOne({
     where: { email },
   });
 
   if (doubledEmail) {
-    res.json({
+    return res.json({
       message: "User already exists",
       statusCode: 403,
       errors: {
@@ -70,11 +71,58 @@ router.post("/", validateSignup, async (req, res) => {
       },
     });
   }
+
+  // Error response: User already exists with the specified username
+  const doubledUsername = await User.findOne({
+    where: { username },
+  });
+
+  if (doubledUsername) {
+    return res.json({
+      message: "User already exists",
+      statusCode: 403,
+      errors: {
+        email: "User with that username already exists",
+      },
+    });
+  }
+
+  // Check for presence of username, first name, last name
+  if (!username) {
+    return res.json({
+      message: "Validation error",
+      statusCode: 400,
+      errors: {
+        username: "Username is required",
+      },
+    });
+  }
+
+  if (!firstName) {
+    return res.json({
+      message: "Validation error",
+      statusCode: 400,
+      errors: {
+        firstName: "First name is required",
+      },
+    });
+  }
+
+  if (!lastName) {
+    return res.json({
+      message: "Validation error",
+      statusCode: 400,
+      errors: {
+        lastName: "Last name is required",
+      },
+    });
+  }
+
   const user = await User.signup({
     firstName,
     lastName,
-    username,
     email,
+    username,
     password,
   });
 
@@ -85,12 +133,6 @@ router.post("/", validateSignup, async (req, res) => {
   return res.json({
     userObj,
   });
-});
-
-router.get("/songs", async (req, res) => {
-  const songs = await Song.findAll();
-  console.log(songs);
-  return res.json(songs);
 });
 
 module.exports = router;
