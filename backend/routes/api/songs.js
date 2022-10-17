@@ -46,14 +46,22 @@ router.get("/:songId", async (req, res) => {
 });
 
 // Delete a Song (Feature 1)
-router.delete("/:songId", async (req, res) => {
+router.delete("/:songId", requireAuth, async (req, res) => {
+  const { user } = req;
+  const currentUserId = user.id;
+  //console.log("Song id...................................", id);
   const primaryKey = req.params.songId;
   const song = await Song.findByPk(primaryKey);
-  Song.destroy({
-    where: {
-      id: Number(primaryKey),
-    },
-  });
+  console.log("song.userId....................", song.userId, currentUserId);
+  // Delete only if current user id equals songId
+  if (song.userId === currentUserId) {
+    Song.destroy({
+      where: {
+        id: Number(primaryKey),
+      },
+    });
+    return res.json("Song successfully deleted");
+  }
 
   // Song does not exist for provided ID
   if (!song) {
@@ -62,7 +70,75 @@ router.delete("/:songId", async (req, res) => {
     err.title = "Song does not exist";
     return res.json(err);
   }
-  return res.json("Song successfully deleted");
+});
+
+// Create a song for an album based on an album's id
+router.post("/", requireAuth, async (req, res) => {
+  const { title, description, imageUrl, url, albumId } = req.body;
+  console.log(req.user.id);
+  if (!title) {
+    return res.json({
+      message: "Validation error",
+      statusCode: 400,
+      errors: {
+        title: "Album title is required",
+      },
+    });
+  }
+
+  if (!url) {
+    return res.json({
+      message: "Validation error",
+      statusCode: 400,
+      errors: {
+        url: "Audio is required",
+      },
+    });
+  }
+
+  // See if album with specified ID exists
+  const album = await Album.findOne({
+    where: {
+      id: albumId,
+    },
+  });
+
+  console.log(album);
+  // if there is no album with id matching albumId, return error
+  if (!album && albumId !== null) {
+    return res.json({
+      message: "Album couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  // no album id, no problem
+  if (!albumId) {
+    const song = await Song.create({
+      userId: req.user.id,
+      title: title,
+      description: description,
+      url: url,
+      imageUrl: imageUrl,
+      albumId: albumId,
+    });
+
+    return res.json(song);
+  }
+
+  // only allow users who own the album to add a song
+  if (req.user.id === album.userId) {
+    const song = await Song.create({
+      userId: req.user.id,
+      title: title,
+      description: description,
+      url: url,
+      imageUrl: imageUrl,
+      albumId: albumId,
+    });
+
+    return res.json(song);
+  }
 });
 
 module.exports = router;
