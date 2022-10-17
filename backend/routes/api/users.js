@@ -57,6 +57,7 @@ const validateSignup = [
 router.post("/", validateSignup, async (req, res) => {
   const { firstName, lastName, email, password, username } = req.body;
 
+  // Error response: User already exists with the specified email
   const doubledEmail = await User.findOne({
     where: { email },
   });
@@ -67,6 +68,52 @@ router.post("/", validateSignup, async (req, res) => {
       statusCode: 403,
       errors: {
         email: "User with that email already exists",
+      },
+    });
+  }
+
+  // Error response: User already exists with the specified username
+  const doubledUsername = await User.findOne({
+    where: { username },
+  });
+
+  if (doubledUsername) {
+    return res.json({
+      message: "User already exists",
+      statusCode: 403,
+      errors: {
+        email: "User with that username already exists",
+      },
+    });
+  }
+
+  // Check for presence of username, first name, last name
+  if (!username) {
+    return res.json({
+      message: "Validation error",
+      statusCode: 400,
+      errors: {
+        username: "Username is required",
+      },
+    });
+  }
+
+  if (!firstName) {
+    return res.json({
+      message: "Validation error",
+      statusCode: 400,
+      errors: {
+        firstName: "First name is required",
+      },
+    });
+  }
+
+  if (!lastName) {
+    return res.json({
+      message: "Validation error",
+      statusCode: 400,
+      errors: {
+        lastName: "Last name is required",
       },
     });
   }

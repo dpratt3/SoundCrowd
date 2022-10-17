@@ -72,6 +72,16 @@ router.delete("/", (_req, res) => {
   return res.json({ message: "success" });
 });
 
+// Get current user
+router.get("/", requireAuth, (req, res) => {
+  const { user } = req;
+  if (user) {
+    return res.json({
+      user, //: user.toSafeObject(),
+    });
+  } else return res.json({});
+});
+
 // Restore session user
 router.get("/", restoreUser, (req, res) => {
   const { user } = req;
