@@ -72,15 +72,27 @@ router.delete("/:songId", requireAuth, async (req, res) => {
 });
 
 // Create a song for an album based on an album's id
-router.post("/", requireAuth, async (req, res) => {
-  const { title, description, imageUrl, url, albumId } = req.body;
-  console.log(req.user.id);
+router.put("/:songId", requireAuth, async (req, res) => {
+  const { title, description, url, imageUrl } = req.body;
+
+  // body validations
   if (!title) {
     return res.json({
       message: "Validation error",
       statusCode: 400,
       errors: {
-        title: "Album title is required",
+        title: "Song title is required",
+      },
+    });
+  }
+
+  if (!url && !title) {
+    return res.json({
+      message: "Validation error",
+      statusCode: 400,
+      errors: {
+        title: "Song title is required",
+        url: "Audio is required",
       },
     });
   }
@@ -95,49 +107,30 @@ router.post("/", requireAuth, async (req, res) => {
     });
   }
 
-  // See if album with specified ID exists
-  const album = await Album.findOne({
+  const song = await Song.findOne({
     where: {
-      id: albumId,
+      id: req.params.songId,
     },
   });
 
-  console.log(album);
-  // if there is no album with id matching albumId, return error
-  if (!album && albumId !== null) {
-    return res.json({
-      message: "Album couldn't be found",
-      statusCode: 404,
-    });
+  if (!song) {
+    const err = new Error("Song does not exist");
+    err.status = 404;
+    err.title = "Song couldn't be found";
+    return res.json(err);
   }
 
-  // no album id, no problem
-  if (!albumId) {
-    const song = await Song.create({
-      userId: req.user.id,
-      title: title,
-      description: description,
-      url: url,
-      imageUrl: imageUrl,
-      albumId: albumId,
-    });
-
-    return res.json(song);
-  }
-
-  // only allow users who own the album to add a song
-  if (req.user.id === album.userId) {
-    const song = await Song.create({
-      userId: req.user.id,
-      title: title,
-      description: description,
-      url: url,
-      imageUrl: imageUrl,
-      albumId: albumId,
-    });
-
-    return res.json(song);
-  }
+  await song.update({
+    title: title,
+    description: description,
+    url: url,
+    imageUrl: imageUrl,
+  });
+  // write the song to the database
+  await song.save();
+  return res.json(song);
 });
+
+//edit an album
 
 module.exports = router;
