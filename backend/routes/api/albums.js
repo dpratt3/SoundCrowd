@@ -33,9 +33,28 @@ router.post("/", requireAuth, async (req, res) => {
 
 // Get all albums
 router.get("/", requireAuth, async (req, res) => {
-  const { title, description, imageUrl } = req.body;
   const albums = await Album.findAll({});
   return res.json(albums);
+});
+
+// Get all albums created by the current user
+router.get("/current", requireAuth, async (req, res) => {
+  const albums = await Album.findAll({
+    where: {
+      userId: req.user.id,
+    },
+  });
+  return res.json(albums);
+});
+
+// Get all albums of an Artist based on the Artist's id
+router.get("/:albumId", requireAuth, async (req, res) => {
+  const album = await Album.findAll({
+    where: {
+      id: req.params.albumId,
+    },
+  });
+  return res.json(album);
 });
 
 module.exports = router;
