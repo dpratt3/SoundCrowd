@@ -47,13 +47,32 @@ router.get("/current", requireAuth, async (req, res) => {
   return res.json(albums);
 });
 
-// Get all albums of an Artist based on the Artist's id
+// Get all albums of an Artist based on the Albums id
 router.get("/:albumId", requireAuth, async (req, res) => {
   const album = await Album.findAll({
     where: {
       id: req.params.albumId,
     },
     include: [User, Song], // User is the artist
+  });
+  // if album is an empty array, return an error
+  if (!album.length) {
+    return res.json({
+      message: "Album couldn't be found",
+      statusCode: 404,
+    });
+  } else {
+    return res.json(album);
+  }
+});
+
+// Get all albums of an Artist based on the Artist's id
+router.get("/:userId", requireAuth, async (req, res) => {
+  const album = await Album.findAll({
+    where: {
+      id: req.params.userId,
+    },
+    //include: [User, Song], // User is the artist
   });
   // if album is an empty array, return an error
   if (!album.length) {
