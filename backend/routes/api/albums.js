@@ -7,6 +7,7 @@ const { handleValidationErrors } = require("../../utils/validation");
 
 const router = express.Router();
 
+// Create an album
 router.post("/", requireAuth, async (req, res) => {
   const { title, description, imageUrl } = req.body;
 
@@ -28,6 +29,13 @@ router.post("/", requireAuth, async (req, res) => {
   });
 
   return res.json(album);
+});
+
+// Get all albums
+router.get("/", requireAuth, async (req, res) => {
+  const { title, description, imageUrl } = req.body;
+  const albums = await Album.findAll({});
+  return res.json(albums);
 });
 
 module.exports = router;
