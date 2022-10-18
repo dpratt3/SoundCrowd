@@ -53,8 +53,17 @@ router.get("/:albumId", requireAuth, async (req, res) => {
     where: {
       id: req.params.albumId,
     },
+    include: [User, Song], // User is the artist
   });
-  return res.json(album);
+  // if album is an empty array, return an error
+  if (!album.length) {
+    return res.json({
+      message: "Album couldn't be found",
+      statusCode: 404,
+    });
+  } else {
+    return res.json(album);
+  }
 });
 
 module.exports = router;
