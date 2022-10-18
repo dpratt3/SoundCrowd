@@ -28,4 +28,25 @@ router.get("/:userId/songs", requireAuth, async (req, res) => {
   }
 });
 
+router.get("/:artistId/albums", requireAuth, async (req, res) => {
+  console.log(req.params.aristId);
+  const albums = await Album.findAll({
+    where: {
+      userId: req.params.artistId,
+    },
+    //include: [Song], // User is the artist
+  });
+  console.log(albums);
+
+  // if album is an empty array, return an error
+  if (!albums.length) {
+    return res.json({
+      message: "Album couldn't be found",
+      statusCode: 404,
+    });
+  } else {
+    return res.json(albums);
+  }
+});
+
 module.exports = router;
