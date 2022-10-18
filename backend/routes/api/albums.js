@@ -85,4 +85,34 @@ router.get("/:userId", requireAuth, async (req, res) => {
   }
 });
 
+// Delete an Album
+router.delete("/:albumId", requireAuth, async (req, res) => {
+  const { user } = req;
+  const currentUserId = user.id;
+  //console.log("Song id...................................", id);
+  const albumKey = req.params.albumId;
+  const album = await Album.findOne({
+    where: {
+      id: albumKey,
+    },
+  });
+  // Song does not exist for provided ID
+  if (!album) {
+    const err = new Error("Song does not exist");
+    err.status = 404;
+    err.title = "Album does not exist";
+    return res.json(err);
+  }
+  //console.log("song.userId....................", song.userId, currentUserId);
+  // Delete only if current user id equals songId
+  if (album.userId === currentUserId) {
+    Album.destroy({
+      where: {
+        id: albumKey,
+      },
+    });
+    return res.json("Album successfully deleted");
+  }
+});
+
 module.exports = router;
