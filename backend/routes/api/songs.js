@@ -18,7 +18,9 @@ router.get("/current", requireAuth, async (req, res) => {
     },
   });
   console.log(userSongs);
-  return res.json(userSongs);
+  return res.json({
+    Songs: userSongs,
+  });
 });
 
 // Get all Songs (Feature 1)
