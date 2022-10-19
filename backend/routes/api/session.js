@@ -62,7 +62,12 @@ router.post("/", async (req, res, next) => {
   userObj.token = token;
 
   return res.json({
-    userObj,
+    id: userObj.id,
+    firstName: userObj.firstName,
+    lastName: userObj.lastName,
+    email: userObj.email,
+    username: userObj.username,
+    token: userObj.token,
   });
 });
 
