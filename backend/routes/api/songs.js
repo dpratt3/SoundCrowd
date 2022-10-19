@@ -72,7 +72,10 @@ router.delete("/:songId", requireAuth, async (req, res) => {
         id: Number(primaryKey),
       },
     });
-    return res.json("Song successfully deleted");
+    return res.json({
+      message: "Song successfully deleted",
+      status: 200,
+    });
   }
 });
 
