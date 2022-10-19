@@ -115,4 +115,43 @@ router.delete("/:albumId", requireAuth, async (req, res) => {
   }
 });
 
+// Create a song for an album based on an album's id
+router.put("/:albumId", requireAuth, async (req, res) => {
+  const { title, description, imageUrl } = req.body;
+
+  // body validations
+  if (!title) {
+    return res.json({
+      message: "Validation error",
+      statusCode: 400,
+      errors: {
+        title: "Song title is required",
+      },
+    });
+  }
+
+  const album = await Album.findOne({
+    where: {
+      id: req.params.albumId,
+    },
+  });
+
+  if (!album) {
+    const err = new Error("Song does not exist");
+    err.status = 404;
+    err.title = "Album couldn't be found";
+    return res.json(err);
+  }
+
+  await album.update({
+    title: title,
+    description: description,
+    imageUrl: imageUrl,
+  });
+
+  // write the album to the database
+  await album.save();
+  return res.json(album);
+});
+
 module.exports = router;

@@ -131,6 +131,4 @@ router.put("/:songId", requireAuth, async (req, res) => {
   return res.json(song);
 });
 
-//edit an album
-
 module.exports = router;
