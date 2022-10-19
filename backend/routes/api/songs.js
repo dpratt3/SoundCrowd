@@ -75,6 +75,75 @@ router.delete("/:songId", requireAuth, async (req, res) => {
 });
 
 // Create a song for an album based on an album's id
+router.post("/", requireAuth, async (req, res) => {
+  const { title, description, imageUrl, url, albumId } = req.body;
+  console.log(req.user.id);
+  if (!title) {
+    return res.json({
+      message: "Validation error",
+      statusCode: 400,
+      errors: {
+        title: "Album title is required",
+      },
+    });
+  }
+
+  if (!url) {
+    return res.json({
+      message: "Validation error",
+      statusCode: 400,
+      errors: {
+        url: "Audio is required",
+      },
+    });
+  }
+
+  // See if album with specified ID exists
+  const album = await Album.findOne({
+    where: {
+      id: albumId,
+    },
+  });
+
+  console.log(album);
+  // if there is no album with id matching albumId, return error
+  if (!album && albumId !== null) {
+    return res.json({
+      message: "Album couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  // no album id, no problem
+  if (!albumId) {
+    const song = await Song.create({
+      userId: req.user.id,
+      title: title,
+      description: description,
+      url: url,
+      imageUrl: imageUrl,
+      albumId: albumId,
+    });
+
+    return res.json(song);
+  }
+
+  // only allow users who own the album to add a song
+  if (req.user.id === album.userId) {
+    const song = await Song.create({
+      userId: req.user.id,
+      title: title,
+      description: description,
+      url: url,
+      imageUrl: imageUrl,
+      albumId: albumId,
+    });
+
+    return res.json(song);
+  }
+});
+
+// Create a song for an album based on an album's id
 router.put("/:songId", requireAuth, async (req, res) => {
   const { title, description, url, imageUrl } = req.body;
 
