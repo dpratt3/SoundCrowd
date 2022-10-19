@@ -153,16 +153,6 @@ router.put("/:songId", requireAuth, async (req, res) => {
   const { title, description, url, imageUrl } = req.body;
 
   // body validations
-  if (!title) {
-    return res.json({
-      message: "Validation error",
-      statusCode: 400,
-      errors: {
-        title: "Song title is required",
-      },
-    });
-  }
-
   if (!url && !title) {
     return res.json({
       message: "Validation error",
@@ -170,6 +160,16 @@ router.put("/:songId", requireAuth, async (req, res) => {
       errors: {
         title: "Song title is required",
         url: "Audio is required",
+      },
+    });
+  }
+
+  if (!title) {
+    return res.json({
+      message: "Validation error",
+      statusCode: 400,
+      errors: {
+        title: "Song title is required",
       },
     });
   }
