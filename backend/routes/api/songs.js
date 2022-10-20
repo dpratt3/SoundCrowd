@@ -54,7 +54,10 @@ router.get("/:songId", async (req, res) => {
 router.delete("/:songId", requireAuth, async (req, res) => {
   const { user } = req;
   const currentUserId = user.id;
-  //console.log("Song id...................................", id);
+  console.log(
+    "current user id...................................",
+    currentUserId
+  );
   const primaryKey = req.params.songId;
   const song = await Song.findByPk(primaryKey);
   // Song does not exist for provided ID
@@ -64,7 +67,7 @@ router.delete("/:songId", requireAuth, async (req, res) => {
     err.title = "Song does not exist";
     return res.json(err);
   }
-  //console.log("song.userId....................", song.userId, currentUserId);
+  console.log("song.userId....................", song.userId, currentUserId);
   // Delete only if current user id equals songId
   if (song.userId === currentUserId) {
     Song.destroy({
@@ -75,6 +78,11 @@ router.delete("/:songId", requireAuth, async (req, res) => {
     return res.json({
       message: "Song successfully deleted",
       status: 200,
+    });
+  } else {
+    return res.json({
+      message: "Artists may only delete songs that they own.",
+      status: 401,
     });
   }
 });
