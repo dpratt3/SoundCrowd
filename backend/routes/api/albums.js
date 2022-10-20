@@ -34,7 +34,9 @@ router.post("/", requireAuth, async (req, res) => {
 // Get all albums
 router.get("/", requireAuth, async (req, res) => {
   const albums = await Album.findAll({});
-  return res.json(albums);
+  return res.json({
+    Albums: albums,
+  });
 });
 
 // Get all albums created by the current user
@@ -44,7 +46,9 @@ router.get("/current", requireAuth, async (req, res) => {
       userId: req.user.id,
     },
   });
-  return res.json(albums);
+  return res.json({
+    Albums: albums,
+  });
 });
 
 // Get all albums of an Artist based on the Albums id
@@ -98,20 +102,28 @@ router.delete("/:albumId", requireAuth, async (req, res) => {
   });
   // Song does not exist for provided ID
   if (!album) {
-    const err = new Error("Song does not exist");
-    err.status = 404;
-    err.title = "Album does not exist";
-    return res.json(err);
+    return res.json({
+      message: "Album could not be found",
+      statusCode: 404,
+    });
   }
   //console.log("song.userId....................", song.userId, currentUserId);
-  // Delete only if current user id equals songId
+  // Delete only if current user id equals albumId
   if (album.userId === currentUserId) {
     Album.destroy({
       where: {
         id: albumKey,
       },
     });
-    return res.json("Album successfully deleted");
+    return res.json({
+      message: "Album successfully deleted",
+      statusCode: 200,
+    });
+  } else {
+    return res.json({
+      message: "Artists may only delete albums that they own.",
+      status: 401,
+    });
   }
 });
 
@@ -137,10 +149,10 @@ router.put("/:albumId", requireAuth, async (req, res) => {
   });
 
   if (!album) {
-    const err = new Error("Song does not exist");
-    err.status = 404;
-    err.title = "Album couldn't be found";
-    return res.json(err);
+    return res.json({
+      message: "Album couldn't be found",
+      statusCode: 404,
+    });
   }
 
   await album.update({
