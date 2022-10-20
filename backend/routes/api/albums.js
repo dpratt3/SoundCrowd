@@ -141,10 +141,10 @@ router.put("/:albumId", requireAuth, async (req, res) => {
   });
 
   if (!album) {
-    const err = new Error("Song does not exist");
-    err.status = 404;
-    err.title = "Album couldn't be found";
-    return res.json(err);
+    return res.json({
+      message: "Album couldn't be found",
+      statusCode: 404,
+    });
   }
 
   await album.update({
