@@ -46,7 +46,9 @@ router.get("/current", requireAuth, async (req, res) => {
       userId: req.user.id,
     },
   });
-  return res.json({ albums });
+  return res.json({
+    Albums: albums,
+  });
 });
 
 // Get all albums of an Artist based on the Albums id
