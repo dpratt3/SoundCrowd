@@ -45,7 +45,9 @@ router.get("/:artistId/albums", requireAuth, async (req, res) => {
       statusCode: 404,
     });
   } else {
-    return res.json(albums);
+    return res.json({
+      Albums: albums,
+    });
   }
 });
 
