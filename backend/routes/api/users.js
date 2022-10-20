@@ -63,7 +63,7 @@ router.post("/", validateSignup, async (req, res) => {
   });
 
   if (doubledEmail) {
-    return res.json({
+    return res.status(403).send({
       message: "User already exists",
       statusCode: 403,
       errors: {
