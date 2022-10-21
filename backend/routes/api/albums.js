@@ -80,7 +80,7 @@ router.get("/:userId", requireAuth, async (req, res) => {
   });
   // if album is an empty array, return an error
   if (!album.length) {
-    return res.json({
+    return res.status(404).send({
       message: "Album couldn't be found",
       statusCode: 404,
     });
@@ -133,7 +133,7 @@ router.put("/:albumId", requireAuth, async (req, res) => {
 
   // body validations
   if (!title) {
-    return res.json({
+    return res.status(400).send({
       message: "Validation error",
       statusCode: 400,
       errors: {
@@ -149,7 +149,7 @@ router.put("/:albumId", requireAuth, async (req, res) => {
   });
 
   if (!album) {
-    return res.json({
+    return res.status(404).send({
       message: "Album couldn't be found",
       statusCode: 404,
     });
