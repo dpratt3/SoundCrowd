@@ -69,10 +69,14 @@ router.delete("/:songId", requireAuth, async (req, res) => {
   const song = await Song.findByPk(primaryKey);
   // Song does not exist for provided ID
   if (!song) {
-    const err = new Error("Song does not exist");
-    err.status = 404;
-    err.title = "Song does not exist";
-    return res.json(err);
+    // const err = new Error("Song does not exist");
+    // err.status = 404;
+    // err.title = "Song does not exist";
+    // return res.json(err);
+    return res.status(404).send({
+      message: "Song couldn't be found",
+      statusCode: 404,
+    });
   }
   console.log("song.userId....................", song.userId, currentUserId);
   // Delete only if current user id equals songId
@@ -82,7 +86,7 @@ router.delete("/:songId", requireAuth, async (req, res) => {
         id: Number(primaryKey),
       },
     });
-    return res.json({
+    return res.status(200).send({
       message: "Song successfully deleted",
       status: 200,
     });

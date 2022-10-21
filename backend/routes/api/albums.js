@@ -102,7 +102,7 @@ router.delete("/:albumId", requireAuth, async (req, res) => {
   });
   // Song does not exist for provided ID
   if (!album) {
-    return res.json({
+    return res.status(404).send({
       message: "Album could not be found",
       statusCode: 404,
     });
