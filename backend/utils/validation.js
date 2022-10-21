@@ -11,7 +11,7 @@ const handleValidationErrors = (req, res, next) => {
   try {
     const param = validationErrors.errors[0].param;
     if (param === "email") {
-      return res.json({
+      return res.status(400).send({
         message: "Validation error",
         statusCode: 400,
         errors: {
@@ -23,7 +23,7 @@ const handleValidationErrors = (req, res, next) => {
     // handle nonexistent username
     const value = validationErrors.errors[0].value;
     if (param === "username" && value.length === 0) {
-      return res.json({
+      return res.status(400).send({
         message: "Validation error",
         statusCode: 400,
         errors: {

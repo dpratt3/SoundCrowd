@@ -78,7 +78,7 @@ router.post("/", validateSignup, async (req, res) => {
   });
 
   if (doubledUsername) {
-    return res.json({
+    return res.status(403).send({
       message: "User already exists",
       statusCode: 403,
       errors: {
@@ -87,19 +87,20 @@ router.post("/", validateSignup, async (req, res) => {
     });
   }
 
+  //console.log("username", username);
   // Check for presence of username, first name, last name
-  if (!username) {
-    return res.json({
-      message: "Validation error",
-      statusCode: 400,
-      errors: {
-        username: "Username is required",
-      },
-    });
-  }
+  // if (!username) {
+  //   return res.status(400).send({
+  //     message: "Validation error",
+  //     statusCode: 400,
+  //     errors: {
+  //       username: "Username is required",
+  //     },
+  //   });
+  // }
 
   if (!firstName) {
-    return res.json({
+    return res.status(400).send({
       message: "Validation error",
       statusCode: 400,
       errors: {
@@ -109,7 +110,7 @@ router.post("/", validateSignup, async (req, res) => {
   }
 
   if (!lastName) {
-    return res.json({
+    return res.status(400).send({
       message: "Validation error",
       statusCode: 400,
       errors: {
