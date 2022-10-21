@@ -42,10 +42,17 @@ router.get("/:songId", async (req, res) => {
 
   // Song does not exist for provided ID
   if (!song) {
-    const err = new Error("Song does not exist");
-    err.status = 404;
-    err.title = "Song does not exist";
-    return res.json(err);
+    // const err = new Error("Song does not exist");
+    // err.status = 404;
+    // err.title = "Song does not exist";
+    // return res.json(err);
+    return res.status(404).send({
+      message: "Song does not exist",
+      statusCode: 404,
+      // errors: {
+      //   email: "User with that username already exists",
+      // },
+    });
   }
   return res.json(song);
 });
@@ -231,7 +238,7 @@ router.put("/:songId", requireAuth, async (req, res) => {
 
   // body validations
   if (!url && !title) {
-    return res.json({
+    return res.status(400).send({
       message: "Validation error",
       statusCode: 400,
       errors: {
@@ -242,7 +249,7 @@ router.put("/:songId", requireAuth, async (req, res) => {
   }
 
   if (!title) {
-    return res.json({
+    return res.status(400).send({
       message: "Validation error",
       statusCode: 400,
       errors: {
@@ -252,7 +259,7 @@ router.put("/:songId", requireAuth, async (req, res) => {
   }
 
   if (!url) {
-    return res.json({
+    return res.status(400).send({
       message: "Validation error",
       statusCode: 400,
       errors: {
@@ -268,10 +275,13 @@ router.put("/:songId", requireAuth, async (req, res) => {
   });
 
   if (!song) {
-    const err = new Error("Song does not exist");
-    err.status = 404;
-    err.title = "Song couldn't be found";
-    return res.json(err);
+    return res.status(404).send({
+      message: "Song couldn't be found",
+      statusCode: 404,
+      // errors: {
+      //   url: "Audio is required",
+      // },
+    });
   }
 
   await song.update({
