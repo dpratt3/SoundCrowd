@@ -92,7 +92,7 @@ router.post("/", requireAuth, async (req, res) => {
   const { title, description, imageUrl, url, albumId } = req.body;
   console.log(req.user.id);
   if (!title) {
-    return res.json({
+    return res.status(400).send({
       message: "Validation error",
       statusCode: 400,
       errors: {
@@ -102,7 +102,7 @@ router.post("/", requireAuth, async (req, res) => {
   }
 
   if (!url) {
-    return res.json({
+    return res.status(400).send({
       message: "Validation error",
       statusCode: 400,
       errors: {
@@ -121,7 +121,7 @@ router.post("/", requireAuth, async (req, res) => {
   console.log(album);
   // if there is no album with id matching albumId, return error
   if (!album && albumId !== null) {
-    return res.json({
+    return res.status(404).send({
       message: "Album couldn't be found",
       statusCode: 404,
     });
