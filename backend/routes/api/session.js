@@ -18,7 +18,7 @@ router.post("/", async (req, res, next) => {
 
   // Body validation errors
   if (!credential && !password) {
-    return res.json({
+    return res.status(400).send({
       message: "Validation error",
       statusCode: 400,
       errors: {
@@ -29,7 +29,7 @@ router.post("/", async (req, res, next) => {
   }
 
   if (!credential) {
-    return res.json({
+    return res.status(400).send({
       message: "Validation error",
       statusCode: 400,
       errors: {
@@ -39,7 +39,7 @@ router.post("/", async (req, res, next) => {
   }
 
   if (!password) {
-    return res.json({
+    return res.status(400).send({
       message: "Validation error",
       statusCode: 400,
       errors: {
@@ -50,11 +50,18 @@ router.post("/", async (req, res, next) => {
 
   // invalid credentials
   if (!user) {
-    const err = new Error("Login failed");
-    err.message = "Invalid credentials";
-    err.errors = "Invalid credentials";
-    err.statusCode = 401;
-    return res.json(err);
+    // const err = new Error("Login failed");
+    // err.message = "Invalid credentials";
+    // err.errors = "Invalid credentials";
+    // err.statusCode = 401;
+    // return res.json(err);
+    return res.status(401).send({
+      message: "Invalid credentials",
+      statusCode: 401,
+      errors: {
+        email: "Invalid credentials",
+      },
+    });
   }
 
   const userObj = user.toJSON();
@@ -117,24 +124,24 @@ const validateLogin = [
 ];
 
 // Log in
-router.post("/", validateLogin, async (req, res, next) => {
-  const { credential, password } = req.body;
+// router.post("/", validateLogin, async (req, res, next) => {
+//   const { credential, password } = req.body;
 
-  const user = await User.login({ credential, password });
+//   const user = await User.login({ credential, password });
 
-  if (!user) {
-    const err = new Error("Login failed");
-    err.status = 401;
-    err.title = "Login failed";
-    err.errors = ["The provided credentials were invalid."];
-    return next(err);
-  }
+//   if (!user) {
+//     const err = new Error("Login failed");
+//     err.status = 401;
+//     err.title = "Login failed";
+//     err.errors = ["The provided credentials were invalid."];
+//     return next(err);
+//   }
 
-  await setTokenCookie(res, user);
+//   await setTokenCookie(res, user);
 
-  return res.json({
-    user,
-  });
-});
+//   return res.json({
+//     user,
+//   });
+// });
 
 module.exports = router;
