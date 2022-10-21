@@ -61,7 +61,7 @@ router.get("/:albumId", requireAuth, async (req, res) => {
   });
   // if album is an empty array, return an error
   if (!album.length) {
-    return res.json({
+    return res.status(404).send({
       message: "Album couldn't be found",
       statusCode: 404,
     });
