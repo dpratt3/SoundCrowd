@@ -19,7 +19,7 @@ router.get("/:userId/songs", requireAuth, async (req, res) => {
   const songsObj = { Songs: songs };
   // if album is an empty array, return an error
   if (!songs.length) {
-    return res.json({
+    return res.status(404).send({
       message: "Album couldn't be found",
       statusCode: 404,
     });
