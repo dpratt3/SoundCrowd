@@ -69,7 +69,7 @@ router.get("/:albumId", requireAuth, async (req, res) => {
       statusCode: 404,
     });
   } else {
-    return res.json(album);
+    return res.json(album[0]); // get object out of array
   }
 });
 
