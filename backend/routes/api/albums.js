@@ -57,7 +57,10 @@ router.get("/:albumId", requireAuth, async (req, res) => {
     where: {
       id: req.params.albumId,
     },
-    include: [User, Song], // User is the artist
+    include: [
+      { model: User, attributes: ["id", "username", "imageUrl"] },
+      { model: Song },
+    ], // User is the artist
   });
   // if album is an empty array, return an error
   if (!album.length) {
