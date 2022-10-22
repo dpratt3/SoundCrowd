@@ -88,6 +88,8 @@ router.delete("/", (_req, res) => {
 router.get("/", requireAuth, (req, res) => {
   const { user } = req;
 
+  const token = setTokenCookie(res, user);
+
   if (user) {
     return res.json({
       id: user.id,
@@ -95,6 +97,7 @@ router.get("/", requireAuth, (req, res) => {
       lastName: user.lastName,
       email: user.email,
       username: user.username,
+      token: token,
     });
   } else return res.json({});
 });
