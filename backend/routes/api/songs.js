@@ -26,7 +26,10 @@ router.get("/current", requireAuth, async (req, res) => {
 // Get all Songs (Feature 1)
 router.get("/", async (req, res) => {
   const songs = await Song.findAll({
-    include: User,
+    include: {
+      model: User,
+      attributes: ["id", "username", "imageUrl"],
+    },
   });
   return res.json({
     Songs: songs,
