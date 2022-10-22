@@ -40,7 +40,18 @@ router.get("/", async (req, res) => {
 router.get("/:songId", async (req, res) => {
   const primaryKey = req.params.songId;
   const song = await Song.findByPk(primaryKey, {
-    include: [Album, User],
+    include: [
+      {
+        model: User,
+        attributes: ["id", "username", "imageUrl"],
+        //["id", "username", "imageUrl"],
+      },
+      {
+        model: Album,
+        attributes: ["id", "title", "imageUrl"],
+        //["id", "username", "imageUrl"],
+      },
+    ],
   });
 
   // Song does not exist for provided ID
