@@ -1,7 +1,16 @@
-"use strict";
+// EVERY seeder file
+'use strict';
+
+// NEW: add this code to each migration file
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+// END of new code
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    options.tableName = 'Playlists';
     return queryInterface.bulkInsert(
       "Playlists",
       [
@@ -54,6 +63,7 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     const Op = Sequelize.Op;
+    options.tableName = 'Playlists';
     return queryInterface.bulkDelete(
       "Playlists",
       {
