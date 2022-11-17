@@ -126,27 +126,26 @@ module.exports = {
     const Op = Sequelize.Op;
     options.tableName = "Songs";
     return queryInterface.bulkDelete(
-      options
-      // "Songs",
-      // {
-      //   title: {
-      //     [Op.in]: [
-      //       // Album 1
-      //       "Yesterday",
-      //       "Tomorrow",
-      //       "Next Week",
-      //       // Album 2
-      //       "Red",
-      //       "Orange",
-      //       "Yellow",
-      //       // Album 3
-      //       "Tick",
-      //       "Tack",
-      //       "Toe",
-      //     ],
-      //   },
-      // },
-      // {}
+      options,
+      {
+        title: {
+          [Op.in]: [
+            // Album 1
+            "Yesterday",
+            "Tomorrow",
+            "Next Week",
+            // Album 2
+            "Red",
+            "Orange",
+            "Yellow",
+            // Album 3
+            "Tick",
+            "Tack",
+            "Toe",
+          ],
+        },
+      },
+      {}
     );
   },
 };
