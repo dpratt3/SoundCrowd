@@ -16,8 +16,16 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "## Database Schema Design",
   "dependencies": {
     "pg": "^8.8.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dpratt3/SoundCrowd.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dpratt3/SoundCrowd/issues"
+  },
+  "homepage": "https://github.com/dpratt3/SoundCrowd#readme"
 }
