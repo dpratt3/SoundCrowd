@@ -1,18 +1,18 @@
 // EVERY seeder file
-'use strict';
+"use strict";
 
 // NEW: add this code to each migration file
 let options = {};
-if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;  // define your schema in options object
+if (process.env.NODE_ENV === "production") {
+  options.schema = process.env.SCHEMA; // define your schema in options object
 }
 // END of new code
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    options.tableName = 'Albums';
+    options.tableName = "Albums";
     return queryInterface.bulkInsert(
-      "Albums",
+      options,
       [
         {
           userId: 1,
@@ -93,28 +93,29 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     const Op = Sequelize.Op;
-    options.tableName = 'Albums';
+    options.tableName = "Albums";
     return queryInterface.bulkDelete(
-      "Albums",
-      {
-        title: {
-          [Op.in]: [
-            // user 1
-            "Hello World",
-            "Goodbye World",
-            "Goodnight Moon",
-            // user 2
-            "ZoomSchool Rejects",
-            "Pandemic Blues",
-            "2022 Overture",
-            //user 3
-            "Lofi Hip-Hop",
-            "TrapCity Nation",
-            "Focus Music",
-          ],
-        },
-      },
-      {}
+      options
+      // "Albums",
+      // {
+      //   title: {
+      //     [Op.in]: [
+      //       // user 1
+      //       "Hello World",
+      //       "Goodbye World",
+      //       "Goodnight Moon",
+      //       // user 2
+      //       "ZoomSchool Rejects",
+      //       "Pandemic Blues",
+      //       "2022 Overture",
+      //       //user 3
+      //       "Lofi Hip-Hop",
+      //       "TrapCity Nation",
+      //       "Focus Music",
+      //     ],
+      //   },
+      // },
+      // {}
     );
   },
 };

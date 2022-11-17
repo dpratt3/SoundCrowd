@@ -1,18 +1,18 @@
 // EVERY seeder file
-'use strict';
+"use strict";
 
 // NEW: add this code to each migration file
 let options = {};
-if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;  // define your schema in options object
+if (process.env.NODE_ENV === "production") {
+  options.schema = process.env.SCHEMA; // define your schema in options object
 }
 // END of new code
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    options.tableName = 'PlaylistSongs';
+    options.tableName = "PlaylistSongs";
     return queryInterface.bulkInsert(
-      "PlaylistSongs",
+      options,
       [
         {
           songId: 1,
@@ -84,13 +84,14 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     const Op = Sequelize.Op;
-    options.tableName = 'PlaylistSongs';
+    options.tableName = "PlaylistSongs";
     return queryInterface.bulkDelete(
-      "PlaylistSongs",
-      {
-        songId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9] },
-      },
-      {}
+      options
+      // "PlaylistSongs",
+      // {
+      //   songId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9] },
+      // },
+      // {}
     );
   },
 };
