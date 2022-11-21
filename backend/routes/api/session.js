@@ -85,12 +85,11 @@ router.delete("/", (_req, res) => {
 });
 
 // Get current user
-router.get("/", requireAuth, (req, res) => {
+router.get("/", (req, res) => {
   const { user } = req;
 
-  const token = setTokenCookie(res, user);
-
   if (user) {
+    const token = setTokenCookie(res, user);
     return res.json({
       id: user.id,
       firstName: user.firstName,
