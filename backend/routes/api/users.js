@@ -39,8 +39,8 @@ const validateSignup = [
     .exists({ checkFalsy: true })
     .isEmail()
     .withMessage("Please provide a valid email."),
-  check("firstName").exists().withMessage("Please provide a valid first name."),
-  check("lastName").exists().withMessage("Please provide a valid last name."),
+  check("firstname").exists().withMessage("Please provide a valid first name."),
+  check("lastname").exists().withMessage("Please provide a valid last name."),
   check("username")
     .exists({ checkFalsy: true })
     .isLength({ min: 4 })
@@ -55,7 +55,7 @@ const validateSignup = [
 
 // Sign up
 router.post("/", validateSignup, async (req, res) => {
-  const { firstName, lastName, email, password, username } = req.body;
+  const { firstname, lastname, email, password, username } = req.body;
 
   // Error response: User already exists with the specified email
   const doubledEmail = await User.findOne({
@@ -99,29 +99,29 @@ router.post("/", validateSignup, async (req, res) => {
   //   });
   // }
 
-  if (!firstName) {
+  if (!firstname) {
     return res.status(400).send({
       message: "Validation error",
       statusCode: 400,
       errors: {
-        firstName: "First name is required",
+        firstname: "First name is required",
       },
     });
   }
 
-  if (!lastName) {
+  if (!lastname) {
     return res.status(400).send({
       message: "Validation error",
       statusCode: 400,
       errors: {
-        lastName: "Last name is required",
+        lastname: "Last name is required",
       },
     });
   }
 
   const user = await User.signup({
-    firstName,
-    lastName,
+    firstname,
+    lastname,
     email,
     username,
     password,
@@ -133,8 +133,8 @@ router.post("/", validateSignup, async (req, res) => {
 
   return res.json({
     id: userObj.id,
-    firstName: userObj.firstName,
-    lastName: userObj.lastName,
+    firstname: userObj.firstname,
+    lastname: userObj.lastname,
     email: userObj.email,
     username: userObj.username,
     token: userObj.token,

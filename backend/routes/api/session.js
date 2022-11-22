@@ -70,8 +70,8 @@ router.post("/", async (req, res, next) => {
 
   return res.json({
     id: userObj.id,
-    firstName: userObj.firstName,
-    lastName: userObj.lastName,
+    firstname: userObj.firstname,
+    lastname: userObj.lastname,
     email: userObj.email,
     username: userObj.username,
     token: userObj.token,
@@ -92,13 +92,13 @@ router.get("/", (req, res) => {
     const token = setTokenCookie(res, user);
     return res.json({
       id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
+      firstname: user.firstname,
+      lastname: user.lastname,
       email: user.email,
       username: user.username,
       token: token,
     });
-  } else return res.json({});
+  } else return res.json(null);
 });
 
 // Restore session user

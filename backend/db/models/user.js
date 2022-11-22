@@ -5,8 +5,8 @@ const bcrypt = require("bcryptjs");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     toSafeObject() {
-      const { id, username, email } = this; // context will be the User instance
-      return { id, username, email };
+      const { id, username, email, firstname, lastname } = this; // context will be the User instance
+      return { id, username, email, firstname, lastname };
     }
     static associate(models) {
       // define association here
@@ -35,11 +35,11 @@ module.exports = (sequelize, DataTypes) => {
         return await User.scope("currentUser").findByPk(user.id);
       }
     }
-    static async signup({ firstName, lastName, username, email, password }) {
+    static async signup({ firstname, lastname, username, email, password }) {
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
-        firstName,
-        lastName,
+        firstname,
+        lastname,
         username,
         email,
         hashedPassword,
@@ -63,11 +63,11 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      firstName: {
+      firstname: {
         type: DataTypes.STRING,
         //allowNull: false,
       },
-      lastName: {
+      lastname: {
         type: DataTypes.STRING,
         //allowNull: false,
       },
