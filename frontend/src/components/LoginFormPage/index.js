@@ -1,8 +1,9 @@
 // frontend/src/components/LoginFormPage/index.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+
 import "./LoginForm.css";
 
 function LoginFormPage() {
@@ -10,25 +11,41 @@ function LoginFormPage() {
   const sessionUser = useSelector((state) => state.session.user);
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [validationErrors, setValidationErrors] = useState([]);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+
+  useEffect(() => {
+    const errors = [];
+    if (!credential.length) errors.push("Please enter your username or email.");
+    if (!password.length) errors.push("Please provide a valid password.");
+    setValidationErrors(errors);
+  }, [credential, password]);
 
   if (sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors([]);
-    return dispatch(sessionActions.login({ credential, password })).catch(
-      async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      }
-    );
+
+    setHasSubmitted(true);
+    if (validationErrors.length) return alert(`Cannot Submit`);
+
+    setValidationErrors([]);
+
+    const formInfo = {
+      credential,
+      password,
+    };
+
+    console.log(formInfo);
+    setCredential("");
+    setPassword("");
+    setHasSubmitted(false);
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <ul>
-        {errors.map((error, idx) => (
+        {validationErrors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
       </ul>

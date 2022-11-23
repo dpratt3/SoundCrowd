@@ -68,8 +68,8 @@ Returns the information about the current user that is logged in.
     ```json
     {
       "id": 1,
-      "firstName": "John",
-      "lastName": "Smith",
+      "firstname": "John",
+      "lastname": "Smith",
       "email": "john.smith@gmail.com",
       "username": "JohnSmith"
     }
@@ -106,8 +106,8 @@ information.
     ```json
     {
       "id": 1,
-      "firstName": "John",
-      "lastName": "Smith",
+      "firstname": "John",
+      "lastname": "Smith",
       "email": "john.smith@gmail.com",
       "username": "JohnSmith",
       "token": ""
@@ -162,8 +162,8 @@ user's information.
 
     ```json
     {
-      "firstName": "John",
-      "lastName": "Smith",
+      "firstname": "John",
+      "lastname": "Smith",
       "username": "JohnSmith",
       "email": "john.smith@gmail.com",
       "password": "secret password"
@@ -180,8 +180,8 @@ user's information.
     ```json
     {
       "id": 1,
-      "firstName": "John",
-      "lastName": "Smith",
+      "firstname": "John",
+      "lastname": "Smith",
       "username": "JohnSmith",
       "email": "john.smith@gmail.com",
       "token": ""
@@ -236,8 +236,8 @@ user's information.
       "errors": {
         "email": "Invalid email",
         "username": "Username is required",
-        "firstName": "First Name is required",
-        "lastName": "Last Name is required"
+        "firstname": "First Name is required",
+        "lastname": "Last Name is required"
       }
     }
     ```

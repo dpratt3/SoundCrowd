@@ -14,8 +14,8 @@ updatedAt timestamp
 Table Users {
 id int [pk, increment, ref: < Playlists.userId]
 username varchar
-firstName varchar
-lastName varchar
+firstname varchar
+lastname varchar
 hashedPassword varchar
 email varchar
 imageUrl varchar
