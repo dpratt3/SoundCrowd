@@ -1,4 +1,3 @@
-// add a React functional component named Navigation.
 // frontend/src/components/Navigation/index.js
 import React from "react";
 import { NavLink } from "react-router-dom";
@@ -15,10 +14,7 @@ function Navigation({ isLoaded }) {
   } else {
     sessionLinks = (
       <>
-        <NavLink to="/login">
-          Log In
-          <i className="fa-sharp fa-solid fa-user"></i>
-        </NavLink>
+        <NavLink to="/login">Log In</NavLink>
         <NavLink to="/signup">Sign Up</NavLink>
       </>
     );
