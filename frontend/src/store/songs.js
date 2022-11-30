@@ -7,7 +7,6 @@ const getSongs = (songs) => ({
 
 export const getAllSongs = () => async(dispatch) => {
     const response = await fetch("/api/songs");
-    console.log(response, ` <--------------------------`)
     if(response.ok){
         const data = await response.json();
         dispatch(getSongs(data));
