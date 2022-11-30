@@ -12,13 +12,13 @@
 //     dispatchEvent(writeSong(newSong));
 //     reset();
 // };
-import "./HomePage.css"
+import "./SongPage.css"
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import {useSelector, useDispatch} from "react-redux";
 import { getAllSongs } from "../../store/songs";
 
-const HomePage = () => {
+const SongPage = () => {
     const dispatch = useDispatch();
     const allSongs = useSelector( (state) => Object.values(state.song) );
     console.log(allSongs, ` <------------------`) 
@@ -43,4 +43,4 @@ const HomePage = () => {
      );
 }
  
-export default HomePage;
+export default SongPage;

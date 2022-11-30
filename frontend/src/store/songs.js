@@ -1,8 +1,14 @@
 const GET_SONGS = "song/GET_SONGS"
+const GET_SONG = "song/GET_SONG"
 
 const getSongs = (songs) => ({
     type: GET_SONGS,
     songs,
+})
+
+const getSong = (song) => ({
+    type: GET_SONG,
+    song,
 })
 
 export const getAllSongs = () => async(dispatch) => {
@@ -10,6 +16,14 @@ export const getAllSongs = () => async(dispatch) => {
     if(response.ok){
         const data = await response.json();
         dispatch(getSongs(data));
+    }
+}
+
+export const getTheSongs = (songId) => async(dispatch) => {
+    const response = await fetch(`/api/songs/${songId}`);
+    if(response.ok){
+        const data = await response.json();
+        dispatch(getSong(data));
     }
 }
 
@@ -23,6 +37,10 @@ const songReducer = (state={}, action) => {
             return {
                 ...allSongs
             }
+        }
+        case GET_SONG:{
+            const theSong = {}
+            console.log(theSong[action.song.Songs.id], ` <--------`)
         }
         default: 
         return state;
