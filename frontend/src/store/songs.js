@@ -19,7 +19,7 @@ export const getAllSongs = () => async(dispatch) => {
     }
 }
 
-export const getTheSongs = (songId) => async(dispatch) => {
+export const getTheSong = (songId) => async(dispatch) => {
     const response = await fetch(`/api/songs/${songId}`);
     if(response.ok){
         const data = await response.json();
@@ -40,7 +40,6 @@ const songReducer = (state={}, action) => {
         }
         case GET_SONG:{
             const theSong = {}
-            console.log(theSong[action.song.Songs.id], ` <--------`)
         }
         default: 
         return state;
