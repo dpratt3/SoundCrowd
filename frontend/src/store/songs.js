@@ -39,10 +39,12 @@ const songReducer = (state={}, action) => {
             }
         }
         case GET_SONG:{
-            const theSong = {}
+            const oneSong = {}
+            oneSong[action.song.id] = action.song;
+            return {...oneSong};
         }
         default: 
-        return state;
+            return state;
     }
 }
 
