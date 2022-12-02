@@ -10,7 +10,7 @@ const SongDetail = () => {
     const dispatch = useDispatch();
     const {songId} = useParams();   
 
-    const oneSong = useSelector( (state) => Object.values(state.song) );
+    const oneSong = useSelector( (state) => Object.values(state.song)[0] );
 
     useEffect(() => {
         dispatch(getTheSong(songId));
@@ -19,19 +19,14 @@ const SongDetail = () => {
     console.log("hello world", songId, ` <--------------------------`)
 
     return ( 
-        <div>
-            { oneSong.map((song) => {
-                return(
+            <div> 
+                <NavLink key={oneSong.id} to={`/songs/${oneSong.id}`}>
                     <div> 
-                        <NavLink key={song.id} to={`/songs/${song.id}`}>
-                            <div> 
-                                {song.title}, {song.description}
-                            </div>
-                        </NavLink>
+                        {oneSong.title}, {oneSong.description}
                     </div>
-                )
-            })}
-        </div>
+                </NavLink>
+                <button>Delete Song</button>
+            </div>
      );
 }
  
