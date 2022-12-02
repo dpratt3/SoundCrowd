@@ -18,7 +18,9 @@ const SongDetail = () => {
     }, [dispatch, songId])
 
     //console.log("hello world", songId, ` <--------------------------`)
-    console.log(oneSong.userId, sessionUser.id, ` <----------------------------`)
+    
+    //console.log(oneSong.userId, sessionUser.id, ` <----------------------------`)
+
     return (
             <>
                 <div> 
