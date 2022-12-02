@@ -21,7 +21,9 @@ import { getAllSongs } from "../../store/songs";
 const SongPage = () => {
     const dispatch = useDispatch();
     const allSongs = useSelector( (state) => Object.values(state.song) );
+
     //console.log(allSongs, ` <------------------`) 
+    
     useEffect(() => {
         dispatch(getAllSongs())
     }, [dispatch])
@@ -37,6 +39,7 @@ const SongPage = () => {
                             </div>
                         </NavLink>
                     </div>
+
                 )
             })}
         </div>
