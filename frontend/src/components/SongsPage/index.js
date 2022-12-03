@@ -34,7 +34,7 @@ const SongPage = () => {
                 return(
                     <div> 
                         <NavLink key={song.id} to={`/songs/${song.id}`}>
-                            <div> 
+                            <div key = {song.id}> 
                                 {song.title}, {song.description}
                             </div>
                         </NavLink>
