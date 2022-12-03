@@ -15,7 +15,7 @@ const getSong = (song) => ({
 })
 
 const deleteSong = (songId) => ({
-    type: GET_SONG,
+    type: DELETE_SONG,
     songId,
 })
 
@@ -62,7 +62,6 @@ const songReducer = (state={}, action) => {
         case DELETE_SONG:{
             const oneSong = {};
             delete oneSong[action.songId]
-            return oneSong
         }
         default: 
             return state;
