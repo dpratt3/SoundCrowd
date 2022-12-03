@@ -39,7 +39,7 @@ export const getTheSong = (songId) => async(dispatch) => {
 export const deleteTheSong = (songId) => async(dispatch) => {
     const options = {method: "DELETE"}
     const response = await csrfFetch(`/api/songs/${songId}`, options);
-    dispatch(deleteTheSong);
+    dispatch(deleteSong(songId));
 }
 
 
@@ -62,6 +62,7 @@ const songReducer = (state={}, action) => {
         case DELETE_SONG:{
             const oneSong = {};
             delete oneSong[action.songId]
+            return oneSong
         }
         default: 
             return state;
