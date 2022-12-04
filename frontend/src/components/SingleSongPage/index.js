@@ -23,7 +23,11 @@ const SongDetail = () => {
         await dispatch(deleteTheSong(songId)).then(() => history.push('/songs'))
         //history.push('/songs')
       };
-  
+
+      const editSong = async (songId) => {
+        await dispatch(deleteTheSong(songId)).then(() => history.push('/songs'))
+        //history.push('/songs')
+      };
 
     //console.log("hello world", songId, ` <--------------------------`)
     
@@ -44,7 +48,7 @@ const SongDetail = () => {
                     <button onClick={() => deleteSong(songId)}>Delete</button>
                 )}
                 {(oneSong.userId === sessionUser?.id) && (
-                    <button onClick={() => deleteSong(songId)}>Edit</button>
+                    <button onClick={() => editSong(songId)}>Edit</button>
                 )}
                 </div>
             </> 

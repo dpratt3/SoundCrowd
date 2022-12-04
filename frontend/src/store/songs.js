@@ -3,6 +3,7 @@ import csrfFetch from "./crsf"
 const GET_SONGS = "song/GET_SONGS"
 const GET_SONG = "song/GET_SONG"
 const DELETE_SONG = "song/DELETE_SONG"
+const EDIT_SONG = "song/DELETE_SONG"
 
 const getSongs = (songs) => ({
     type: GET_SONGS,
@@ -17,6 +18,11 @@ const getSong = (song) => ({
 const deleteSong = (songId) => ({
     type: DELETE_SONG,
     songId,
+})
+
+const editSong = (songId) => ({
+    TYPE: EDIT_SONG,
+    songId
 })
 
 
@@ -37,12 +43,22 @@ export const getTheSong = (songId) => async(dispatch) => {
 }
 
 export const deleteTheSong = (songId) => async(dispatch) => {
-    const options = {method: "DELETE"}
+    const options = {
+        method: "DELETE"
+    }
     const response = await csrfFetch(`/api/songs/${songId}`, options);
     dispatch(deleteSong(songId));
     return response
 }
 
+export const editTheSong = (songId) => async(dispatch) => {
+    const options = {
+        method: "PUT"
+    }
+    const response = await csrfFetch(`/api/songs/${songId}`, options);
+    dispatch(editSong(songId));
+    return response
+}
 
 const songReducer = (state={}, action) => {
     switch(action.type){
@@ -64,7 +80,15 @@ const songReducer = (state={}, action) => {
             // const oneSong = {};
             // delete oneSong[action.songId]
             const newState = {...state}
-            console.log(newState, ` <------------- before deletion`)
+            //console.log(newState, ` <------------- before deletion`)
+            delete newState[action.songId]
+            return newState;
+        }
+        case EDIT_SONG:{
+            // const oneSong = {};
+            // delete oneSong[action.songId]
+            const newState = {...state}
+            //console.log(newState, ` <------------- before deletion`)
             delete newState[action.songId]
             return newState;
         }
