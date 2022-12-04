@@ -3,35 +3,48 @@ import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getTheSong } from "../../store/songs";
+import { getTheSong, deleteTheSong } from "../../store/songs";
+import { useHistory } from "react-router-dom";
 
 
 const SongDetail = () => {
     const dispatch = useDispatch();
-    const {songId} = useParams();   
+    const {songId} = useParams();
+    const history = useHistory();   
 
-    const oneSong = useSelector( (state) => Object.values(state.song) );
+    const oneSong = useSelector( (state) => Object.values(state.song)[0] );
+    const sessionUser = useSelector( (state) => state.session.user);
 
     useEffect(() => {
         dispatch(getTheSong(songId));
     }, [dispatch, songId])
 
-    console.log("hello world", songId, ` <--------------------------`)
+    const deleteSong = async (songId) => {
+        await dispatch(deleteTheSong(songId)).then(() => history.push('/songs'))
+        //history.push('/songs')
+      };
+  
 
-    return ( 
-        <div>
-            { oneSong.map((song) => {
-                return(
-                    <div> 
-                        <NavLink key={song.id} to={`/songs/${song.id}`}>
-                            <div> 
-                                {song.title}, {song.description}
-                            </div>
-                        </NavLink>
-                    </div>
-                )
-            })}
-        </div>
+    //console.log("hello world", songId, ` <--------------------------`)
+    
+    //console.log(oneSong.userId, sessionUser.id, ` <----------------------------`) //breaks if not logged in!
+    if(!(oneSong && oneSong.id)) return null
+    
+    return (
+            <>
+                <div> 
+                    <NavLink key={oneSong.id} to={`/songs/${oneSong.id}`}>
+                        <div> 
+                            {oneSong.title}, {oneSong.description}
+                        </div>
+                    </NavLink>
+                </div>
+                <div className="song-buttons">
+                    {(oneSong.userId === sessionUser?.id) && (
+                    <button onClick={() => deleteSong(songId)}>Delete</button>
+                )}
+                </div>
+            </> 
      );
 }
  

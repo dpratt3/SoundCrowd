@@ -21,22 +21,25 @@ import { getAllSongs } from "../../store/songs";
 const SongPage = () => {
     const dispatch = useDispatch();
     const allSongs = useSelector( (state) => Object.values(state.song) );
+
     //console.log(allSongs, ` <------------------`) 
+    
     useEffect(() => {
         dispatch(getAllSongs())
     }, [dispatch])
 
     return ( 
         <div>
-            { allSongs.map((song) => {
+            {allSongs && allSongs.length > 0 && allSongs.map((song) => {
                 return(
-                    <div> 
-                        <NavLink key={song.id} to={`/songs/${song.id}`}>
+                    <div key={song.id}> 
+                        <NavLink to={`/songs/${song.id}`}>
                             <div> 
                                 {song.title}, {song.description}
                             </div>
                         </NavLink>
                     </div>
+
                 )
             })}
         </div>
