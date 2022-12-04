@@ -43,6 +43,9 @@ const SongDetail = () => {
                     {(oneSong.userId === sessionUser?.id) && (
                     <button onClick={() => deleteSong(songId)}>Delete</button>
                 )}
+                {(oneSong.userId === sessionUser?.id) && (
+                    <button onClick={() => deleteSong(songId)}>Edit</button>
+                )}
                 </div>
             </> 
      );
