@@ -19,19 +19,17 @@ const SongDetail = () => {
         dispatch(getTheSong(songId));
     }, [dispatch, songId])
 
-    const deleteSong = (songId) => {
-        history.push('/songs')
-        return (
-          dispatch(deleteTheSong(songId))
-        );
-        window.location.reload();
+    const deleteSong = async (songId) => {
+        await dispatch(deleteTheSong(songId)).then(() => history.push('/songs'))
+        //history.push('/songs')
       };
   
 
     //console.log("hello world", songId, ` <--------------------------`)
     
     //console.log(oneSong.userId, sessionUser.id, ` <----------------------------`) //breaks if not logged in!
-
+    if(!(oneSong && oneSong.id)) return null
+    
     return (
             <>
                 <div> 

@@ -32,9 +32,9 @@ const SongPage = () => {
         <div>
             {allSongs && allSongs.length > 0 && allSongs.map((song) => {
                 return(
-                    <div> 
-                        <NavLink key={song.id} to={`/songs/${song.id}`}>
-                            <div key = {song.id}> 
+                    <div key={song.id}> 
+                        <NavLink to={`/songs/${song.id}`}>
+                            <div> 
                                 {song.title}, {song.description}
                             </div>
                         </NavLink>
