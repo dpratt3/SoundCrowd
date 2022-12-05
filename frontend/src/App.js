@@ -8,6 +8,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SongsPage from "./components/SongsPage";
 import SingleSongPage from "./components/SingleSongPage"
+import EditSongForm from "./components/EditSongForm"
 
 function App() {
   const dispatch = useDispatch();

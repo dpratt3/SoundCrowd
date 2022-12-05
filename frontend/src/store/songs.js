@@ -20,9 +20,9 @@ const deleteSong = (songId) => ({
     songId,
 })
 
-const editSong = (songId) => ({
+const editSong = (song) => ({
     TYPE: EDIT_SONG,
-    songId
+    song
 })
 
 
@@ -51,13 +51,21 @@ export const deleteTheSong = (songId) => async(dispatch) => {
     return response
 }
 
-export const editTheSong = (songId) => async(dispatch) => {
+export const editTheSong = (song, songId) => async(dispatch) => {
     const options = {
-        method: "PUT"
+        method: "PUT",
+        headers: {
+            "Content-Type": "appplication/json"
+        },
+        body: JSON.stringify(song)
     }
     const response = await csrfFetch(`/api/songs/${songId}`, options);
-    dispatch(editSong(songId));
-    return response
+    
+    if(response.ok){
+        const song = await response.json
+        dispatch(editSong(song));
+        return song
+    }
 }
 
 const songReducer = (state={}, action) => {
