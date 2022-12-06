@@ -8,6 +8,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SongsPage from "./components/SongsPage";
 import SingleSongPage from "./components/SingleSongPage"
+import EditSongForm from "./components/EditSongForm"
 
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +22,9 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route path='/songs/:songId/edit'>
+            <SingleSongPage />
+          </Route>
           <Route exact path="/songs">
             <SongsPage />
           </Route>
