@@ -22,6 +22,9 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route path='/songs/:songId/edit'>
+            <SingleSongPage />
+          </Route>
           <Route exact path="/songs">
             <SongsPage />
           </Route>

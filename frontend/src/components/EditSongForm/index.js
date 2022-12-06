@@ -77,7 +77,7 @@ function EditSongForm({song}) {
         ImageUrl
         <input
           type="text"
-          value={url}
+          value={imageUrl}
           onChange={(e) => setUrl(e.target.value)}
           required
         />
