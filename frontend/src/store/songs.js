@@ -21,7 +21,7 @@ const deleteSong = (songId) => ({
 })
 
 const editSong = (song) => ({
-    TYPE: EDIT_SONG,
+    type: EDIT_SONG,
     song
 })
 
@@ -55,7 +55,7 @@ export const editTheSong = (song, songId) => async(dispatch) => {
     const options = {
         method: "PUT",
         headers: {
-            "Content-Type": "appplication/json"
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(song)
     }
@@ -93,6 +93,7 @@ const songReducer = (state={}, action) => {
             return newState;
         }
         case EDIT_SONG:{
+            console.log(action.type, action.song)
             // const oneSong = {};
             // delete oneSong[action.songId]
             const newState = {...state}
