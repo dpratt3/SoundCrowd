@@ -4,7 +4,7 @@ const GET_SONGS = "song/GET_SONGS"
 const GET_SONG = "song/GET_SONG"
 const DELETE_SONG = "song/DELETE_SONG"
 const EDIT_SONG = "song/EDIT_SONG"
-
+const CREATE_SONG = "song/CREATE_SONG"
 
 const getSongs = (songs) => ({
     type: GET_SONGS,
@@ -23,6 +23,11 @@ const deleteSong = (songId) => ({
 
 const editSong = (song) => ({
     type: EDIT_SONG,
+    song
+})
+
+const createSong = (song) => ({
+    type: CREATE_SONG,
     song
 })
 
@@ -69,6 +74,23 @@ export const editTheSong = (song, songId) => async(dispatch) => {
     }
 }
 
+export const createTheSong = (song, songId) => async(dispatch) => {
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(song)
+    }
+    const response = await csrfFetch(`/api/songs/${songId}`, options);
+    
+    if(response.ok){
+        const song = await response.json
+        dispatch(editSong(song));
+        return song
+    }
+}
+
 const songReducer = (state={}, action) => {
     switch(action.type){
         case GET_SONGS:{
@@ -94,6 +116,11 @@ const songReducer = (state={}, action) => {
             return newState;
         }
         case EDIT_SONG:{
+            const newState = {...state}
+            newState[action.song.id] = action.song
+            return newState;
+        }
+        case CREATE_SONG:{
             const newState = {...state}
             newState[action.song.id] = action.song
             return newState;
