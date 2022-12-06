@@ -93,12 +93,8 @@ const songReducer = (state={}, action) => {
             return newState;
         }
         case EDIT_SONG:{
-            console.log(action.type, action.song)
-            // const oneSong = {};
-            // delete oneSong[action.songId]
             const newState = {...state}
-            //console.log(newState, ` <------------- before deletion`)
-            delete newState[action.songId]
+            newState[action.song.id] = action.song
             return newState;
         }
         default: 
