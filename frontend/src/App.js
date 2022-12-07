@@ -9,6 +9,8 @@ import Navigation from "./components/Navigation";
 import SongsPage from "./components/SongsPage";
 import SingleSongPage from "./components/SingleSongPage"
 import EditSongForm from "./components/EditSongForm"
+import AlbumPage from "./components/AlbumsPage";
+import SingleAlbumPage from "./components/SingleAlbumPage"
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +29,12 @@ function App() {
           </Route>
           <Route exact path="/songs">
             <SongsPage />
+          </Route>
+          <Route path="/albums/:albumId">
+            <SingleAlbumPage />
+          </Route>
+          <Route exact path="/albums">
+            <AlbumPage />
           </Route>
           <Route path='/songs/:songId'>
             <SingleSongPage />

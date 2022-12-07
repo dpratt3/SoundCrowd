@@ -4,7 +4,7 @@ const GET_SONGS = "song/GET_SONGS"
 const GET_SONG = "song/GET_SONG"
 const DELETE_SONG = "song/DELETE_SONG"
 const EDIT_SONG = "song/EDIT_SONG"
-const CREATE_SONG = "song/EDIT_SONG"
+const CREATE_SONG = "song/CREATE_SONG"
 
 const getSongs = (songs) => ({
     type: GET_SONGS,
@@ -68,7 +68,7 @@ export const editTheSong = (song, songId) => async(dispatch) => {
     const response = await csrfFetch(`/api/songs/${songId}`, options);
     
     if(response.ok){
-        const song = await response.json
+        const song = await response.json()
         dispatch(editSong(song));
         return song
     }

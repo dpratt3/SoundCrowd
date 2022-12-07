@@ -1,43 +1,36 @@
-
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+// frontend/src/components/LoginFormPage/index.js
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import './CreateForm.css'
-import { createTheSong } from "../../store/songs";
-import { getAllAlbums } from "../../store/album";
+import './CreateAlbumForm.css'
+import { createTheAlbum } from "../../store/album";
 
 
-function CreateSongForm() {
+function CreateAlbumForm() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const albumIds = useSelector((state) => Object.values(state.album).filter(album => album.userId == sessionUser.id).map(album => album.title));
+  
   const userId = sessionUser.id;
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const [url, setUrl] = useState();
   const [imageUrl, setImageUrl] = useState()
-  const [albumId, setAlbumId] = useState()
+  const [albumTitle, setAlbumTitle] = useState()
   const [errors, setErrors] = useState([]);
-
-  useEffect(() => {
-    dispatch(getAllAlbums())
-  }, [dispatch])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
 
-    const newSong = {
-      userId,
-      title,
-      description,
-      url,
-      imageUrl,
-      albumId: Number(albumId)
-    };
-
-  
-    await dispatch(createTheSong(newSong)).catch(
+    const newAlbum = {
+        userId,
+        title,
+        description,
+        url,
+        imageUrl,
+        //albumTitle
+        };
+    
+  await dispatch(createTheAlbum(newAlbum)).catch(
       async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
@@ -88,18 +81,18 @@ function CreateSongForm() {
           required
         />
       </label>
-      <label>
-        AlbumId
-        <select 
-          name="albumId" 
-          onChange={(e) => setAlbumId(e.target.value)} 
-          required >
-            {albumIds.map(albumId => <option key={albumId} value={albumId}>{albumId}</option>)}
-        </select>
-      </label>
+      {/* <label>
+        Album Title
+        <input
+          type="text"
+          value={albumTitle}
+          onChange={(e) => setAlbumTitle(e.target.value)}
+          required
+        />
+      </label> */}
       <button type="submit">Submit</button>
     </form>
   );
 }
 
-export default CreateSongForm;
+export default CreateAlbumForm;
