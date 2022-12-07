@@ -1,18 +1,16 @@
-// frontend/src/components/LoginFormPage/index.js
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import { Redirect } from "react-router-dom";
 import './CreateForm.css'
 import { createTheSong } from "../../store/songs";
+import { getAllAlbums } from "../../store/album";
 
 
-// pass song in as prop
 function CreateSongForm() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  
-  //console.log(sessionUser.id, ` <----------------- session user from create song form`)
+  const albumIds = useSelector((state) => Object.values(state.album).filter(album => album.userId == sessionUser.id).map(album => album.id));
   const userId = sessionUser.id;
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
@@ -21,21 +19,25 @@ function CreateSongForm() {
   const [albumId, setAlbumId] = useState()
   const [errors, setErrors] = useState([]);
 
+  useEffect(() => {
+    dispatch(getAllAlbums())
+  }, [dispatch])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
 
     const newSong = {
-        userId,
-        title,
-        description,
-        url,
-        imageUrl,
-        albumId: null
-        };
-    
-  console.log(newSong, ` <------------ This is the song that we want to write to the DB`)
-  await dispatch(createTheSong(newSong)).catch(
+      userId,
+      title,
+      description,
+      url,
+      imageUrl,
+      albumId: Number(albumId)
+    };
+
+  
+    await dispatch(createTheSong(newSong)).catch(
       async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
@@ -88,12 +90,12 @@ function CreateSongForm() {
       </label>
       <label>
         AlbumId
-        <input
-          type="text"
-          value={albumId}
-          onChange={(e) => setAlbumId(e.target.value)}
-          required
-        />
+        <select 
+          name="albumId" 
+          onChange={(e) => setAlbumId(e.target.value)} 
+          required >
+            {albumIds.map(albumId => <option key={albumId} value={albumId}>{albumId}</option>)}
+        </select>
       </label>
       <button type="submit">Submit</button>
     </form>
