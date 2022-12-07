@@ -42,8 +42,9 @@ const SongDetail = () => {
     const [formStatus, setFormStatus] = useState(false);
 
     if (!(oneSong && oneSong.id)) return null
-
+    console.log(oneSong)
     return (
+        
         <>
             <div>
                 <NavLink key={oneSong.id} to={`/songs/${oneSong.id}`}>
