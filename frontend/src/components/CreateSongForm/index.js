@@ -10,7 +10,7 @@ import { getAllAlbums } from "../../store/album";
 function CreateSongForm() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const albumIds = useSelector((state) => Object.values(state.album).filter(album => album.userId == sessionUser.id).map(album => album.id));
+  const albumIds = useSelector((state) => Object.values(state.album).filter(album => album.userId == sessionUser.id).map(album => album.title));
   const userId = sessionUser.id;
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();

@@ -14,7 +14,7 @@ function CreateAlbumForm() {
   const [description, setDescription] = useState();
   const [url, setUrl] = useState();
   const [imageUrl, setImageUrl] = useState()
-  const [albumId, setAlbumId] = useState()
+  const [albumTitle, setAlbumTitle] = useState()
   const [errors, setErrors] = useState([]);
 
   const handleSubmit = async (e) => {
@@ -27,7 +27,7 @@ function CreateAlbumForm() {
         description,
         url,
         imageUrl,
-        albumId: null
+        //albumTitle
         };
     
   await dispatch(createTheAlbum(newAlbum)).catch(
@@ -81,15 +81,15 @@ function CreateAlbumForm() {
           required
         />
       </label>
-      <label>
-        AlbumId
+      {/* <label>
+        Album Title
         <input
           type="text"
-          value={albumId}
-          onChange={(e) => setAlbumId(e.target.value)}
+          value={albumTitle}
+          onChange={(e) => setAlbumTitle(e.target.value)}
           required
         />
-      </label>
+      </label> */}
       <button type="submit">Submit</button>
     </form>
   );
