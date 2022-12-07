@@ -23,7 +23,6 @@ function Navigation({ isLoaded }) {
         <NavLink to="/login">Log In </NavLink>
         <NavLink to="/signup">Sign Up </NavLink>
         <NavLink to="/songs">Songs </NavLink>
-        <NavLink to="/albums">Albums </NavLink>
       </>
     );
   }
