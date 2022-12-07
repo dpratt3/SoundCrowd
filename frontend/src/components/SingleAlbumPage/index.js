@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getTheAlbum } from "../../store/album";
+import { getTheAlbum, deleteTheAlbum } from "../../store/album";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import LoginFormPage from "../LoginFormPage";
@@ -13,17 +13,17 @@ const AlbumDetail = () => {
     const { albumId } = useParams();
     const history = useHistory();
 
-    const onealbum = useSelector((state) => Object.values(state.album)[0]);
+    const onealbum = useSelector((state) => state.album[albumId]);
     const sessionUser = useSelector((state) => state.session.user);
 
     useEffect(() => {
         dispatch(getTheAlbum(albumId));
     }, [dispatch, albumId])
 
-    // const deletealbum = async (albumId) => {
-    //     await dispatch(deleteThealbum(albumId)).then(() => history.push('/albums'))
-    //     //history.push('/albums')
-    // };
+    const deleteAlbum = async (albumId) => {
+        await dispatch(deleteTheAlbum(albumId)).then(() => history.push('/albums'))
+        //history.push('/albums')
+    };
 
     // const editalbum = async (albumId) => {
     //     await dispatch(deleteThealbum(albumId)).then(() => history.push('/albums'))
@@ -51,10 +51,10 @@ const AlbumDetail = () => {
                 </NavLink>
             </div>
             <div className="album-buttons">
-                {/* {(onealbum.userId === sessionUser?.id) && (
-                    <button onClick={() => deletealbum(albumId)}>Delete</button>
-                )}
                 {(onealbum.userId === sessionUser?.id) && (
+                    <button onClick={() => deleteAlbum(albumId)}>Delete</button>
+                )}
+                {/* {(onealbum.userId === sessionUser?.id) && (
                     <button onClick={() => {
                         setFormStatus(!formStatus)
                         console.log(formStatus, ` <----------------- form status`)
@@ -66,8 +66,8 @@ const AlbumDetail = () => {
                     //<Redirect to=`/albums/${onealbum.id`/>
                    //history.push(`/albums/${onealbum.id}/edit`)
                    <EditalbumForm album={onealbum}/>
-                )}
-                 */}
+                )} */}
+                
             </div>
         </>
     );

@@ -1,7 +1,8 @@
 import csrfFetch from "./crsf"
 
-const GET_ALBUMS = "song/GET_ALBUMS"
-const GET_ALBUM = "song/GET_ALBUM"
+const GET_ALBUMS = "album/GET_ALBUMS"
+const GET_ALBUM = "album/GET_ALBUM"
+const DELETE_ALBUM = "album/DELETE_ALBUM"
 
 const getAlbums = (albums) => ({
     type: GET_ALBUMS,
@@ -11,6 +12,11 @@ const getAlbums = (albums) => ({
 const getAlbum = (album) => ({
     type: GET_ALBUM,
     album,
+})
+
+const deleteAlbum = (albumId) => ({
+    type: DELETE_ALBUM,
+    albumId,
 })
 
 export const getAllAlbums = () => async(dispatch) => {
@@ -29,6 +35,15 @@ export const getTheAlbum = (albumId) => async(dispatch) => {
     }
 }
 
+export const deleteTheAlbum = (albumId) => async(dispatch) => {
+    const options = {
+        method: "DELETE"
+    }
+    const response = await csrfFetch(`/api/albums/${albumId}`, options)
+    dispatch(deleteAlbum(albumId));
+    return response
+}
+
 const albumReducer = (state={}, action) => {
     switch(action.type){
         case GET_ALBUMS:{
@@ -44,6 +59,11 @@ const albumReducer = (state={}, action) => {
             const oneAlbum = {}
             oneAlbum[action.album.id] = action.album;
             return {...oneAlbum};
+        }
+        case DELETE_ALBUM:{
+            const newState = {...state}
+            delete newState[action.albumId]
+            return newState
         }
         default: 
             return state;
