@@ -4,6 +4,7 @@ const GET_ALBUMS = "album/GET_ALBUMS"
 const GET_ALBUM = "album/GET_ALBUM"
 const DELETE_ALBUM = "album/DELETE_ALBUM"
 const EDIT_ALBUM = "album/EDIT_ALBUM"
+const CREATE_ALBUM = "album/CREATE_ALBUM"
 
 const getAlbums = (albums) => ({
     type: GET_ALBUMS,
@@ -22,6 +23,11 @@ const deleteAlbum = (albumId) => ({
 
 const editAlbum = (album) => ({
     type: EDIT_ALBUM,
+    album,
+})
+
+const createAlbum = (album) => ({
+    type: CREATE_ALBUM,
     album,
 })
 
@@ -67,6 +73,23 @@ export const editTheAlbum = (album, albumId) => async(dispatch) => {
     }
 }
 
+export const createTheAlbum = (album) => async(dispatch) => {
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(album)
+    }
+    const response = await csrfFetch(`/api/albums`, options);
+
+    if(response.ok){
+        const album = await response.json()
+        dispatch(createAlbum(album));
+        return album
+    }
+}
+
 const albumReducer = (state={}, action) => {
     switch(action.type){
         case GET_ALBUMS:{
@@ -89,6 +112,11 @@ const albumReducer = (state={}, action) => {
             return newState
         }
         case EDIT_ALBUM:{
+            const newState = {...state}
+            newState[action.album.id] = action.album
+            return newState;
+        }
+        case CREATE_ALBUM:{
             const newState = {...state}
             newState[action.album.id] = action.album
             return newState;

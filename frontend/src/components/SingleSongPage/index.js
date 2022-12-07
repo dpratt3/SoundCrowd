@@ -24,19 +24,7 @@ const SongDetail = () => {
 
     const deleteSong = async (songId) => {
         await dispatch(deleteTheSong(songId)).then(() => history.push('/songs'))
-        //history.push('/songs')
     };
-
-    const editSong = async (songId) => {
-        await dispatch(deleteTheSong(songId)).then(() => history.push('/songs'))
-        //history.push('/songs')
-    };
-
-    //console.log("hello world", songId, ` <--------------------------`)
-
-    //console.log(oneSong.userId, sessionUser.id, ` <----------------------------`) //breaks if not logged in
-
-    //show edit form react state (conditional rendering)
 
     const [formStatus, setFormStatus] = useState(false);
 
@@ -52,21 +40,17 @@ const SongDetail = () => {
                 </NavLink>
             </div>
             <div className="song-buttons">
-                {console.log(oneSong , sessionUser,oneSong.userId && sessionUser?.id && oneSong.userId === sessionUser?.id)}
+                {console.log(oneSong, sessionUser, oneSong.userId && sessionUser?.id && oneSong.userId === sessionUser?.id)}
                 {(oneSong.userId && sessionUser?.id && oneSong.userId === sessionUser?.id) && (
                     <button onClick={() => deleteSong(songId)}>Delete</button>
                 )}
-                {(oneSong.userId && sessionUser?.id  && oneSong.userId === sessionUser?.id) && (
-                    <button onClick={() => {
-                        setFormStatus(!formStatus)
-                        console.log(formStatus, ` <----------------- form status`)
-                    }
-                    }>Edit</button>
+                {(oneSong.userId && sessionUser?.id && oneSong.userId === sessionUser?.id) && (
+                    <button onClick={() => setFormStatus(!formStatus)}>Edit</button>
                 )}
                 {(oneSong.userId && sessionUser?.id && oneSong.userId === sessionUser?.id) && (formStatus) && (
-                   <EditSongForm song={oneSong}/>
+                    <EditSongForm song={oneSong} />
                 )}
-                
+
             </div>
         </>
     );
