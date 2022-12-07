@@ -1,3 +1,4 @@
+// this comment might allow merging of the dev-alt branch
 import "./SingleSong.css"
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
@@ -41,8 +42,9 @@ const SongDetail = () => {
     const [formStatus, setFormStatus] = useState(false);
 
     if (!(oneSong && oneSong.id)) return null
-
+    console.log(oneSong)
     return (
+        
         <>
             <div>
                 <NavLink key={oneSong.id} to={`/songs/${oneSong.id}`}>
