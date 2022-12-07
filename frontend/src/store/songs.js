@@ -68,7 +68,7 @@ export const editTheSong = (song, songId) => async(dispatch) => {
     const response = await csrfFetch(`/api/songs/${songId}`, options);
     
     if(response.ok){
-        const song = await response.json
+        const song = await response.json()
         dispatch(editSong(song));
         return song
     }

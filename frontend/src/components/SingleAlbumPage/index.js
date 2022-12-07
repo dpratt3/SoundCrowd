@@ -3,9 +3,10 @@ import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getTheAlbum, deleteTheAlbum } from "../../store/album";
+import { getTheAlbum, deleteTheAlbum, editTheAlbum } from "../../store/album";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
+import EditAlbumForm from "../EditAlbumForm";
 import LoginFormPage from "../LoginFormPage";
 
 const AlbumDetail = () => {
@@ -13,7 +14,7 @@ const AlbumDetail = () => {
     const { albumId } = useParams();
     const history = useHistory();
 
-    const onealbum = useSelector((state) => state.album[albumId]);
+    const oneAlbum = useSelector((state) => state.album[albumId]);
     const sessionUser = useSelector((state) => state.session.user);
 
     useEffect(() => {
@@ -22,52 +23,37 @@ const AlbumDetail = () => {
 
     const deleteAlbum = async (albumId) => {
         await dispatch(deleteTheAlbum(albumId)).then(() => history.push('/albums'))
-        //history.push('/albums')
+
     };
-
-    // const editalbum = async (albumId) => {
-    //     await dispatch(deleteThealbum(albumId)).then(() => history.push('/albums'))
-    //     //history.push('/albums')
-    // };
-
-    //console.log("hello world", albumId, ` <--------------------------`)
-
-    //console.log(onealbum.userId, sessionUser.id, ` <----------------------------`) //breaks if not logged in
-
-    //show edit form react state (conditional rendering)
 
     const [formStatus, setFormStatus] = useState(false);
 
-    if (!(onealbum && onealbum.id)) return null
-    console.log(onealbum)
+    if (!(oneAlbum && oneAlbum.id)) return null
+
     return (
-        
+
         <>
             <div>
-                <NavLink key={onealbum.id} to={`/albums/${onealbum.id}`}>
+                <NavLink key={oneAlbum.id} to={`/albums/${oneAlbum.id}`}>
                     <div>
-                        {onealbum.title}, {onealbum.description}
+                        {oneAlbum.title}, {oneAlbum.description}
                     </div>
                 </NavLink>
             </div>
             <div className="album-buttons">
-                {(onealbum.userId === sessionUser?.id) && (
+                {(oneAlbum.userId === sessionUser?.id) && (
                     <button onClick={() => deleteAlbum(albumId)}>Delete</button>
                 )}
-                {/* {(onealbum.userId === sessionUser?.id) && (
+                {(oneAlbum.userId === sessionUser?.id) && (
                     <button onClick={() => {
                         setFormStatus(!formStatus)
-                        console.log(formStatus, ` <----------------- form status`)
                     }
                     }>Edit</button>
                 )}
-                {(onealbum.userId === sessionUser?.id) && (formStatus) && (
-                    //<h1>you clicked me</h1>
-                    //<Redirect to=`/albums/${onealbum.id`/>
-                   //history.push(`/albums/${onealbum.id}/edit`)
-                   <EditalbumForm album={onealbum}/>
-                )} */}
-                
+                {(oneAlbum.userId === sessionUser?.id) && (formStatus) && (
+                    <EditAlbumForm album={oneAlbum} />
+                )}
+
             </div>
         </>
     );

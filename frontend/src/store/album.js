@@ -3,6 +3,7 @@ import csrfFetch from "./crsf"
 const GET_ALBUMS = "album/GET_ALBUMS"
 const GET_ALBUM = "album/GET_ALBUM"
 const DELETE_ALBUM = "album/DELETE_ALBUM"
+const EDIT_ALBUM = "album/EDIT_ALBUM"
 
 const getAlbums = (albums) => ({
     type: GET_ALBUMS,
@@ -17,6 +18,11 @@ const getAlbum = (album) => ({
 const deleteAlbum = (albumId) => ({
     type: DELETE_ALBUM,
     albumId,
+})
+
+const editAlbum = (album) => ({
+    type: EDIT_ALBUM,
+    album,
 })
 
 export const getAllAlbums = () => async(dispatch) => {
@@ -44,6 +50,23 @@ export const deleteTheAlbum = (albumId) => async(dispatch) => {
     return response
 }
 
+export const editTheAlbum = (album, albumId) => async(dispatch) => {
+    const options = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(album)
+    }
+    const response = await csrfFetch(`/api/albums/${albumId}`, options);
+    
+    if(response.ok){
+        const album = await response.json()
+        dispatch(editAlbum(album));
+        return album
+    }
+}
+
 const albumReducer = (state={}, action) => {
     switch(action.type){
         case GET_ALBUMS:{
@@ -64,6 +87,11 @@ const albumReducer = (state={}, action) => {
             const newState = {...state}
             delete newState[action.albumId]
             return newState
+        }
+        case EDIT_ALBUM:{
+            const newState = {...state}
+            newState[action.album.id] = action.album
+            return newState;
         }
         default: 
             return state;
