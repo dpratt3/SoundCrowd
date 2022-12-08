@@ -1,13 +1,13 @@
 
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import './CreateForm.css'
 import { createTheSong } from "../../store/songs";
 import { getAllAlbums } from "../../store/album";
 
 
-function CreateSongForm() {
+const CreateSongForm = ({setFormStatus, formStatus}) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const albumIds = useSelector((state) => Object.values(state.album).filter(album => album.userId == sessionUser.id).map(album => album.title));
@@ -18,6 +18,7 @@ function CreateSongForm() {
   const [imageUrl, setImageUrl] = useState()
   const [albumId, setAlbumId] = useState()
   const [errors, setErrors] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(getAllAlbums())
@@ -40,9 +41,13 @@ function CreateSongForm() {
     await dispatch(createTheSong(newSong)).catch(
       async (res) => {
         const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
+        if (data && data.errors) {setErrors(data.errors)}
       }
     );
+    if(errors.length == 0){
+
+      setFormStatus(!formStatus)
+    }
   };
 
   return (

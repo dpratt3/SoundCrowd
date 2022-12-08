@@ -54,7 +54,7 @@ const MySongsPage = () => {
                     }>Create Song</button>
                 )}
                 {(sessionUser?.id) && (formStatus) && (
-                   <CreateSongForm song={oneSong}/>
+                   <CreateSongForm setFormStatus={setFormStatus} formStatus={formStatus}/>
                 )}
                 
             </div>
