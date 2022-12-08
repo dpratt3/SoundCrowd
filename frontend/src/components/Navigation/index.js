@@ -16,6 +16,7 @@ function Navigation({ isLoaded }) {
         <ProfileButton user={sessionUser} />
         <NavLink to="/songs">Songs </NavLink>
         <NavLink to="/albums">Albums </NavLink>
+        <NavLink to="/my-songs">My-Songs </NavLink>
       </>
     );
   } else {

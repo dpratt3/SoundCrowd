@@ -11,6 +11,7 @@ import SingleSongPage from "./components/SingleSongPage"
 import EditSongForm from "./components/EditSongForm"
 import AlbumPage from "./components/AlbumsPage";
 import SingleAlbumPage from "./components/SingleAlbumPage"
+import MySongsPage from "./components/MySongsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +27,9 @@ function App() {
         <Switch>
           <Route path='/songs/:songId/edit'>
             <SingleSongPage />
+          </Route>
+          <Route exact path="/my-songs">
+            <MySongsPage />
           </Route>
           <Route exact path="/songs">
             <SongsPage />
