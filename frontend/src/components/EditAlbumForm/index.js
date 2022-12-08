@@ -25,7 +25,6 @@ function EditAlbumForm({album}) {
     const albumEdits = {
         title,
         description,
-        url,
         imageUrl
         };
 
@@ -78,7 +77,7 @@ function EditAlbumForm({album}) {
         <input
           type="text"
           value={imageUrl}
-          onChange={(e) => setUrl(e.target.value)}
+          onChange={(e) => setImageUrl(e.target.value)}
           required
         />
       </label>
