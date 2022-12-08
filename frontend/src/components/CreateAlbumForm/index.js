@@ -5,7 +5,7 @@ import './CreateAlbumForm.css'
 import { createTheAlbum } from "../../store/album";
 
 
-function CreateAlbumForm() {
+const CreateAlbumForm = ({ setFormStatus, formStatus }) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   
@@ -33,9 +33,12 @@ function CreateAlbumForm() {
   await dispatch(createTheAlbum(newAlbum)).catch(
       async (res) => {
         const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
+        if (data && data.errors){ setErrors(data.errors) };
       }
-    );
+      );
+      if(errors.length == 0) {
+        setFormStatus(!formStatus)
+      }
   };
 
   return (

@@ -14,6 +14,7 @@ const AlbumPage = () => {
     const allAlbums = useSelector((state) => Object.values(state.album));
     const sessionUser = useSelector((state) => state.session.user);
     const [formStatus, setFormStatus] = useState(false);
+    const history = useHistory();
 
     useEffect(() => {
         dispatch(getAllAlbums())
@@ -21,27 +22,29 @@ const AlbumPage = () => {
 
     return (
         <>
-            <div>
+            <div style={{ margin: 20}}>
+                {(sessionUser?.id) && (
+                    <button style={{marginBottom: 8, backgroundColor: "#a32b2b"}} onClick={() => setFormStatus(!formStatus)}>Create Album</button>
+                )}
+                {(sessionUser?.id) && (formStatus) && (
+                    <CreateAlbumForm setFormStatus={setFormStatus} formStatus={formStatus} />
+                )}
+
+            </div>
+            <div style={{ margin: 20, display: "flex", flexWrap: "wrap", justifyContent: "space-between" }} >
                 {allAlbums && allAlbums.length > 0 && allAlbums.map((album) => {
                     return (
-                        <div key={album.id}>
-                            <NavLink to={`/albums/${album.id}`}>
-                                <div>
-                                    {album.title}, {album.description}
+                        <div key={album.id} onClick={() => history.push(`/albums/${album.id}`)}  style={{ flex: "1 0 0", marginTop: 20 }}>
+                            <img src={album.imageUrl} style={{ width: 200, height: 200 }}></img>
+                                <div style={{ fontSize: 12, fontWeight: "bold", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif" }}>
+                                    {album.title}
                                 </div>
-                            </NavLink>
+                                <div style={{ fontSize: 10, fontWeight: "bold", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif" }}>
+                                    {album.description}
+                                </div>
                         </div>
                     )
                 })}
-            </div>
-            <div className="song-buttons">
-                {(sessionUser?.id) && (
-                    <button onClick={() => setFormStatus(!formStatus)}>Create Album</button>
-                )}
-                {(sessionUser?.id) && (formStatus) && (
-                    <CreateAlbumForm />
-                )}
-
             </div>
         </>
     );
