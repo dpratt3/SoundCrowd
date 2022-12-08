@@ -64,7 +64,7 @@ function EditAlbumForm({album}) {
           required
         />
       </label>
-      <label>
+      {/* <label>
         Url
         <input
           type="text"
@@ -72,7 +72,7 @@ function EditAlbumForm({album}) {
           onChange={(e) => setUrl(e.target.value)}
           required
         />
-      </label>
+      </label> */}
       <label>
         ImageUrl
         <input
