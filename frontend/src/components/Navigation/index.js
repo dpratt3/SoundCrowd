@@ -28,8 +28,7 @@ function Navigation({ isLoaded }) {
     );
   } else {
     sessionLinks = (
-      <div style={{display: "flex",
-      justifyContent: "space-between",alignItems: "center", textAlign: "center"}}>
+      <div style={{display: "flex", justifyContent: "space-between",alignItems: "center", textAlign: "center"}}>
         <img src="/favicon.ico" style={{width: 40}}></img>
         <NavLink style={{color: "#fff", textDecoration: "none"}} exact to="/">Home </NavLink>
         <NavLink to="/login">Log In </NavLink>

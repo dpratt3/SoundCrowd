@@ -33,9 +33,9 @@ const SongPage = () => {
     return (
         <>
             <div style={{ margin: 20}}>
-                <div className="song-buttons">
+                <div>
                     {(sessionUser?.id) && (
-                        <button style={{marginBottom: 8}} onClick={() => {
+                        <button style={{marginBottom: 8, backgroundColor: "#a32b2b"}} onClick={() => {
                             setFormStatus(!formStatus)
                         }
                         }>Create Song</button>
