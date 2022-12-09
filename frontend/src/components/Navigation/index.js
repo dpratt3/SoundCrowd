@@ -17,10 +17,10 @@ function Navigation({ isLoaded }) {
         display: "flex",
       justifyContent: "space-between", alignItems: 'center', textAlign: "center"}}>
         <img src="/favicon.ico" style={{width: 40}}></img>
-        <NavLink style={{color: "#fff", textDecoration: "none"}} exact to="/">Home </NavLink>
-        <NavLink style={{color: "#fff", textDecoration: "none"}} to="/songs">Songs </NavLink>
-        <NavLink style={{color: "#fff", textDecoration: "none"}} to="/albums">Albums </NavLink>
-        <NavLink style={{color: "#fff", textDecoration: "none"}} to="/my-songs">My-Songs </NavLink>
+        <NavLink className="nav-link" exact to="/">Home </NavLink>
+        <NavLink className="nav-link" to="/songs">Songs </NavLink>
+        <NavLink className="nav-link" to="/albums">Albums </NavLink>
+        <NavLink className="nav-link" to="/my-songs">My-Songs </NavLink>
         <div style={{position: "relative"}}>
         <ProfileButton style={{ position: "absolute", backgroundColor: "#333", color: "#fff", textDecoration: "none", display: "block"}} user={sessionUser} />
         </div>
@@ -30,10 +30,10 @@ function Navigation({ isLoaded }) {
     sessionLinks = (
       <div style={{display: "flex", justifyContent: "space-between",alignItems: "center", textAlign: "center"}}>
         <img src="/favicon.ico" style={{width: 40}}></img>
-        <NavLink style={{color: "#fff", textDecoration: "none"}} exact to="/">Home </NavLink>
-        <NavLink to="/login">Log In </NavLink>
-        <NavLink to="/signup">Sign Up </NavLink>
-        <NavLink to="/songs">Songs </NavLink>
+        <NavLink className="nav-link" exact to="/">Home </NavLink>
+        <NavLink className="nav-link" to="/login">Log In </NavLink>
+        <NavLink className="nav-link" to="/signup">Sign Up </NavLink>
+        <NavLink className="nav-link" to="/songs">Songs </NavLink>
         <DemoUserButton />
         </div>
     );
