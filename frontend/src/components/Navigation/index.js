@@ -16,7 +16,10 @@ function Navigation({ isLoaded }) {
         position: "relative",
         display: "flex",
       justifyContent: "space-between", alignItems: 'center', textAlign: "center"}}>
+        <div style={{display: "flex", alignItems: "center", justifyContent: 'center' , color: "#fff", fontWeight: "bold"}}>
         <img src="/favicon.ico" style={{width: 40}}></img>
+        <p>SoundCrowd</p>
+        </div>
         <NavLink className="nav-link" exact to="/">Home </NavLink>
         <NavLink className="nav-link" to="/songs">Songs </NavLink>
         <NavLink className="nav-link" to="/albums">Albums </NavLink>
@@ -29,7 +32,10 @@ function Navigation({ isLoaded }) {
   } else {
     sessionLinks = (
       <div style={{display: "flex", justifyContent: "space-between",alignItems: "center", textAlign: "center"}}>
+       <div style={{display: "flex", alignItems: "center", justifyContent: 'center' , color: "#fff", fontWeight: "bold"}}>
         <img src="/favicon.ico" style={{width: 40}}></img>
+        <p>SoundCrowd</p>
+        </div>
         <NavLink className="nav-link" exact to="/">Home </NavLink>
         <NavLink className="nav-link" to="/login">Log In </NavLink>
         <NavLink className="nav-link" to="/signup">Sign Up </NavLink>
