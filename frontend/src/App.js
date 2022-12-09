@@ -11,6 +11,7 @@ import SingleSongPage from "./components/song/SingleSongPage"
 import AlbumPage from "./components/album/AlbumsPage";
 import SingleAlbumPage from "./components/album/SingleAlbumPage"
 import MySongsPage from "./components/song/MySongsPage";
+import Homepage from "./components/Homepage/Homepage"
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +48,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route exact path="/">
+            <Homepage />
           </Route>
         </Switch>
       )}
