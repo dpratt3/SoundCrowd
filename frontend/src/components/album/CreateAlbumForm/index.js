@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import './CreateAlbumForm.css'
-import { createTheAlbum } from "../../store/album";
+import { createTheAlbum } from "../../../store/album";
 
 const CreateAlbumForm = ({ setFormStatus, formStatus }) => {
   const dispatch = useDispatch();

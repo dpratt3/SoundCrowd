@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import './CreateForm.css'
-import { createTheSong } from "../../store/songs";
-import { getAllAlbums } from "../../store/album";
-import { editTheSong, getTheSong } from "../../store/songs";
+import { createTheSong } from "../../../store/songs";
+import { getAllAlbums } from "../../../store/album";
+import { editTheSong, getTheSong } from "../../../store/songs";
 
 
 const SongForm = ({ song, setFormStatus, formStatus }) => {

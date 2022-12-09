@@ -1,12 +1,9 @@
-import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllAlbums } from "../../store/album";
-import { useParams } from "react-router-dom";
+import { getAllAlbums } from '../../../store/album'
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
-import LoginFormPage from "../LoginFormPage";
-import CreateAlbumForm from "../CreateAlbumForm";
+import CreateAlbumForm from "../../album/CreateAlbumForm";
 
 
 const AlbumPage = () => {

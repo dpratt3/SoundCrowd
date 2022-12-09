@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getTheSong, deleteTheSong } from "../../store/songs";
+import { getTheSong, deleteTheSong } from "../../../store/songs";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import SongForm from "../SongForm";

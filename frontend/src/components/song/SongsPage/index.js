@@ -1,22 +1,29 @@
-import "./MySongsPage.css"
-import { NavLink } from "react-router-dom";
+import "./SongPage.css"
 import { useEffect } from "react";
-import {useSelector, useDispatch} from "react-redux";
-import { getAllSongs } from "../../store/songs";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllSongs } from "../../../store/songs";
 import { useParams } from "react-router-dom";
-import { getTheSong, deleteTheSong } from "../../store/songs";
+import {  deleteTheSong } from "../../../store/songs";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
-import LoginFormPage from "../LoginFormPage";
 import SongForm from "../SongForm";
 
-const MySongsPage = () => {
-    const sessionUser = useSelector((state) => state.session.user);
+
+const SongPage = () => {
     const dispatch = useDispatch();
-    const allSongs = useSelector( (state) => Object.values(state.song).filter(song => song.userId == sessionUser.id));
+    const allSongs = useSelector((state) => Object.values(state.song));
+    const oneSong = useSelector((state) => Object.values(state.song)[0]);
+    const sessionUser = useSelector((state) => state.session.user);
+    const { songId } = useParams();
     const history = useHistory();
     const [formStatus, setFormStatus] = useState(false);
-    
+
+    //console.log(allSongs, ` <------------------`) 
+    const deleteSong = async (songId) => {
+        await dispatch(deleteTheSong(songId)).then(() => history.push('/songs'))
+        //history.push('/songs')
+    };
+
     useEffect(() => {
         dispatch(getAllSongs())
     }, [dispatch])
@@ -37,10 +44,10 @@ const MySongsPage = () => {
 
                 </div>
             </div>
-            <div style={{ margin: 20, display: "flex", flexWrap: "wrap", justifyContent: "space-around" }}>
+            <div style={{ margin: 20, display: "flex", flexWrap: "wrap", justifyContent: "space-between" }}>
                 {allSongs && allSongs.length > 0 && allSongs.map((song) => {
                     return (
-                        <div key={song.id} onClick={() => history.push(`/songs/${song.id}`)} style={{ flex: "1 0 0 1", marginTop: 20 }}>
+                        <div key={song.id} onClick={() => history.push(`/songs/${song.id}`)} style={{ flex: "1 0 0", marginTop: 20 }}>
                             <img src={song.imageUrl} style={{ width: 200, height: 200 }}></img>
 
                             <div style={{ fontSize: 12, fontWeight: "bold", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif" }}>
@@ -55,7 +62,7 @@ const MySongsPage = () => {
             </div>
 
         </>
-     );     
+    );
 }
- 
-export default MySongsPage;
+
+export default SongPage;

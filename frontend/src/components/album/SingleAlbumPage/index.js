@@ -3,11 +3,10 @@ import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getTheAlbum, deleteTheAlbum, editTheAlbum } from "../../store/album";
+import { getTheAlbum, deleteTheAlbum } from "../../../store/album";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import EditAlbumForm from "../EditAlbumForm";
-import LoginFormPage from "../LoginFormPage";
 
 const AlbumDetail = () => {
     const dispatch = useDispatch();

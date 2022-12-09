@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // import { Redirect } from "react-router-dom";
 import './EditAlbumForm.css'
-import { editTheAlbum, getTheAlbum } from "../../store/album";
+import { editTheAlbum, getTheAlbum } from "../../../store/album";
 
 // pass song in as prop
 function EditAlbumForm({album}) {
