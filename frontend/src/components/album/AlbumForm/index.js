@@ -32,7 +32,9 @@ const AlbumForm = ({ album, setFormStatus, formStatus }) => {
       const editedAlbum = await dispatch(editTheAlbum(albumEdits, albumId)).catch(
         async (res) => {
           const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
+          if (data && data.errors) {
+            setErrors(Object.keys(data.errors).map(key => data.errors[key]));
+          }
         }
       );
 
@@ -48,7 +50,9 @@ const AlbumForm = ({ album, setFormStatus, formStatus }) => {
       await dispatch(createTheAlbum(newAlbum)).catch(
         async (res) => {
           const data = await res.json();
-          if (data && data.errors) { setErrors(data.errors) };
+          if (data && data.errors) {
+            setErrors(Object.keys(data.errors).map(key => data.errors[key]));
+          }
         }
       );
 

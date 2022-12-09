@@ -46,7 +46,9 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
       const editedSong = await dispatch(editTheSong(songEdits, songId)).catch(
         async (res) => {
           const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
+          if (data && data.errors) {
+            setErrors(Object.keys(data.errors).map(key => data.errors[key]));
+          }
         }
       );
 
@@ -68,7 +70,9 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
       await dispatch(createTheSong(newSong)).catch(
         async (res) => {
           const data = await res.json();
-          if (data && data.errors) { setErrors(data.errors) }
+          if (data && data.errors) {
+            setErrors(Object.keys(data.errors).map(key => data.errors[key]));
+          }
         }
       );
       if (errors.length == 0) {
