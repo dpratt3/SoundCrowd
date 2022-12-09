@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllAlbums } from '../../../store/album'
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
-import CreateAlbumForm from "../../album/CreateAlbumForm";
+import AlbumForm from "../AlbumForm";
 
 
 const AlbumPage = () => {
@@ -24,7 +24,7 @@ const AlbumPage = () => {
                     <button style={{marginBottom: 8, backgroundColor: "#a32b2b"}} onClick={() => setFormStatus(!formStatus)}>Create Album</button>
                 )}
                 {(sessionUser?.id) && (formStatus) && (
-                    <CreateAlbumForm setFormStatus={setFormStatus} formStatus={formStatus} />
+                    <AlbumForm setFormStatus={setFormStatus} formStatus={formStatus} />
                 )}
 
             </div>

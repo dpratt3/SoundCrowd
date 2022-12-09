@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { getTheAlbum, deleteTheAlbum } from "../../../store/album";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
-import EditAlbumForm from "../EditAlbumForm";
+import AlbumForm from "../AlbumForm";
 import SongsGrid from "../../song/SongsGrid/SongsGrid"
 
 const AlbumDetail = () => {
@@ -54,7 +54,7 @@ const AlbumDetail = () => {
             </div>
             <div style={{ marginTop: 8 }}>
                 {(oneAlbum.userId && sessionUser?.id && oneAlbum.userId === sessionUser?.id) && (formStatus) && (
-                    <EditAlbumForm album={oneAlbum} setFormStatus={setFormStatus} formStatus={formStatus} />
+                    <AlbumForm album={oneAlbum} setFormStatus={setFormStatus} formStatus={formStatus} />
                 )}
             </div>
 

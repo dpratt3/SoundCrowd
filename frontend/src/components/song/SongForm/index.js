@@ -12,7 +12,7 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
   const dispatch = useDispatch();
   const { songId } = useParams();
   const sessionUser = useSelector((state) => state.session.user);
-  const albumIds = useSelector((state) => Object.values(state.album).filter(album => album.userId == sessionUser.id).map(album => album.title));
+  const albumIds = useSelector((state) => Object.values(state.album).filter(album => album.userId == sessionUser.id).map(album => album.id));
   const userId = sessionUser.id;
 
 
@@ -20,16 +20,11 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
   const [description, setDescription] = useState(song?.description);
   const [url, setUrl] = useState(song?.url);
   const [imageUrl, setImageUrl] = useState(song?.imageUrl)
-  const [albumId, setAlbumId] = useState()
+  const [albumId, setAlbumId] = useState(song?.albumId)
 
   const [errors, setErrors] = useState([]);
 
-  const songEdits = {
-    title,
-    description,
-    url,
-    imageUrl
-  };
+
 
   useEffect(() => {
     dispatch(getAllAlbums())
@@ -39,16 +34,15 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
     e.preventDefault();
     setErrors([]);
 
-    const newSong = {
-      userId,
-      title,
-      description,
-      url,
-      imageUrl,
-      albumId: Number(albumId)
-    };
+
 
     if (song) {
+      const songEdits = {
+        title,
+        description,
+        url,
+        imageUrl
+      };
       const editedSong = await dispatch(editTheSong(songEdits, songId)).catch(
         async (res) => {
           const data = await res.json();
@@ -62,6 +56,15 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
       }
 
     } else {
+      const newSong = {
+        userId,
+        title,
+        description,
+        url,
+        imageUrl,
+        albumId: albumId
+      };
+
       await dispatch(createTheSong(newSong)).catch(
         async (res) => {
           const data = await res.json();
