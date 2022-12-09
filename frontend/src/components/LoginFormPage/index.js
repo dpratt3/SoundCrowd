@@ -25,7 +25,7 @@ function LoginFormPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{minWidth: 600}}>
+    <form onSubmit={handleSubmit} style={{maxWidth: 600}}>
       <ul>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>

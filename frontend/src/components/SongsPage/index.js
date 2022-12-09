@@ -8,7 +8,7 @@ import { getTheSong, deleteTheSong } from "../../store/songs";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import LoginFormPage from "../LoginFormPage";
-import CreateSongForm from "../CreateSongForm";
+import SongForm from "../SongForm";
 
 
 const SongPage = () => {
@@ -41,7 +41,7 @@ const SongPage = () => {
                         }>Create Song</button>
                     )}
                     {(sessionUser?.id) && (formStatus) && (
-                        <CreateSongForm setFormStatus={setFormStatus} formStatus={formStatus} />
+                        <SongForm setFormStatus={setFormStatus} formStatus={formStatus} />
                     )}
 
                 </div>

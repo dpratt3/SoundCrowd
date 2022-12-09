@@ -8,23 +8,14 @@ import { getTheSong, deleteTheSong } from "../../store/songs";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import LoginFormPage from "../LoginFormPage";
-import CreateSongForm from "../CreateSongForm";
+import SongForm from "../SongForm";
 
 const MySongsPage = () => {
     const sessionUser = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
     const allSongs = useSelector( (state) => Object.values(state.song).filter(song => song.userId == sessionUser.id));
-    const oneSong = useSelector((state) => Object.values(state.song)[0]);
-    
-    const { songId } = useParams();
     const history = useHistory();
     const [formStatus, setFormStatus] = useState(false);
-
-    //console.log(allSongs, ` <------------------`) 
-    const deleteSong = async (songId) => {
-        await dispatch(deleteTheSong(songId)).then(() => history.push('/songs'))
-        //history.push('/songs')
-    };
     
     useEffect(() => {
         dispatch(getAllSongs())
@@ -41,7 +32,7 @@ const MySongsPage = () => {
                         }>Create Song</button>
                     )}
                     {(sessionUser?.id) && (formStatus) && (
-                        <CreateSongForm setFormStatus={setFormStatus} formStatus={formStatus} />
+                        <SongForm setFormStatus={setFormStatus} formStatus={formStatus} />
                     )}
 
                 </div>

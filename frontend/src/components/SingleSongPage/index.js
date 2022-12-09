@@ -6,8 +6,7 @@ import { useParams } from "react-router-dom";
 import { getTheSong, deleteTheSong } from "../../store/songs";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
-import LoginFormPage from "../LoginFormPage";
-import EditSongForm from "../EditSongForm";
+import SongForm from "../SongForm";
 
 
 const SongDetail = () => {
@@ -31,28 +30,36 @@ const SongDetail = () => {
     if (!(oneSong && oneSong.id)) return null
 
     return (
-        <>
-            <div>
-                <NavLink key={oneSong.id} to={`/songs/${oneSong.id}`}>
-                    <div>
-                        {oneSong.title}, {oneSong.description}
-                    </div>
-                </NavLink>
+        <div style={{ margin: 20 }}>
+            <div >
+                <div style={{ color: "black" }}>
+                    <h2>{oneSong.title}</h2>
+                    <p>{oneSong.description}</p>
+                </div>
             </div>
-            <div className="song-buttons">
-                {console.log(oneSong, sessionUser, oneSong.userId && sessionUser?.id && oneSong.userId === sessionUser?.id)}
+            <div>
+                <img src={oneSong.imageUrl} style={{ maxWidth: 500, borderRadius: 4 }}></img>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", marginTop: 4 }}>
+                <audio controls>
+                    <source src={oneSong.url}></source>
+                </audio>
                 {(oneSong.userId && sessionUser?.id && oneSong.userId === sessionUser?.id) && (
-                    <button onClick={() => deleteSong(songId)}>Delete</button>
-                )}
-                {(oneSong.userId && sessionUser?.id && oneSong.userId === sessionUser?.id) && (
-                    <button onClick={() => setFormStatus(!formStatus)}>Edit</button>
-                )}
-                {(oneSong.userId && sessionUser?.id && oneSong.userId === sessionUser?.id) && (formStatus) && (
-                    <EditSongForm song={oneSong} />
+                    <button style={{ margin: 4, backgroundColor: "#a32b2b" }} onClick={() => setFormStatus(!formStatus)}>Edit</button>
                 )}
 
+
+                {(!formStatus && oneSong.userId && sessionUser?.id && oneSong.userId === sessionUser?.id) && (
+                    <button style={{ margin: 4, backgroundColor: "#a32b2b" }} className="button" onClick={() => deleteSong(songId)}>Delete</button>
+                )}
             </div>
-        </>
+            <div style={{ marginTop: 8 }}>
+                {(oneSong.userId && sessionUser?.id && oneSong.userId === sessionUser?.id) && (formStatus) && (
+                    <SongForm song={oneSong} setFormStatus={setFormStatus} formStatus={formStatus} />
+                )}
+            </div>
+
+        </div>
     );
 }
 

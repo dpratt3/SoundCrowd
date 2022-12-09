@@ -5,20 +5,31 @@ import { useDispatch, useSelector } from "react-redux";
 import './CreateForm.css'
 import { createTheSong } from "../../store/songs";
 import { getAllAlbums } from "../../store/album";
+import { editTheSong, getTheSong } from "../../store/songs";
 
 
-const CreateSongForm = ({ setFormStatus, formStatus }) => {
+const SongForm = ({ song, setFormStatus, formStatus }) => {
   const dispatch = useDispatch();
+  const { songId } = useParams();
   const sessionUser = useSelector((state) => state.session.user);
   const albumIds = useSelector((state) => Object.values(state.album).filter(album => album.userId == sessionUser.id).map(album => album.title));
   const userId = sessionUser.id;
-  const [title, setTitle] = useState();
-  const [description, setDescription] = useState();
-  const [url, setUrl] = useState();
-  const [imageUrl, setImageUrl] = useState()
+
+
+  const [title, setTitle] = useState(song?.title);
+  const [description, setDescription] = useState(song?.description);
+  const [url, setUrl] = useState(song?.url);
+  const [imageUrl, setImageUrl] = useState(song?.imageUrl)
   const [albumId, setAlbumId] = useState()
+
   const [errors, setErrors] = useState([]);
-  const history = useHistory();
+
+  const songEdits = {
+    title,
+    description,
+    url,
+    imageUrl
+  };
 
   useEffect(() => {
     dispatch(getAllAlbums())
@@ -37,16 +48,30 @@ const CreateSongForm = ({ setFormStatus, formStatus }) => {
       albumId: Number(albumId)
     };
 
+    if (song) {
+      const editedSong = await dispatch(editTheSong(songEdits, songId)).catch(
+        async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors);
+        }
+      );
 
-    await dispatch(createTheSong(newSong)).catch(
-      async (res) => {
-        const data = await res.json();
-        if (data && data.errors) { setErrors(data.errors) }
+      if (editedSong) {
+        setFormStatus(!formStatus);
+        dispatch(getTheSong(songId));
       }
-    );
-    if (errors.length == 0) {
 
-      setFormStatus(!formStatus)
+    } else {
+      await dispatch(createTheSong(newSong)).catch(
+        async (res) => {
+          const data = await res.json();
+          if (data && data.errors) { setErrors(data.errors) }
+        }
+      );
+      if (errors.length == 0) {
+
+        setFormStatus(!formStatus)
+      }
     }
   };
 
@@ -57,7 +82,7 @@ const CreateSongForm = ({ setFormStatus, formStatus }) => {
           <li key={idx}>{error}</li>
         ))}
       </ul>
-     <div className="form-item">
+      <div className="form-item">
         <label>
           Title
         </label>
@@ -80,7 +105,7 @@ const CreateSongForm = ({ setFormStatus, formStatus }) => {
         />
       </div>
 
-     <div className="form-item">
+      <div className="form-item">
         <label>
           Url
         </label>
@@ -92,7 +117,7 @@ const CreateSongForm = ({ setFormStatus, formStatus }) => {
         />
       </div>
 
-     <div className="form-item">
+      <div className="form-item">
         <label>
           ImageUrl
         </label>
@@ -104,22 +129,22 @@ const CreateSongForm = ({ setFormStatus, formStatus }) => {
         />
       </div>
 
-     <div className="form-item">
+      <div className="form-item">
         <label>
           AlbumId
         </label>
-       
+
         <select
           name="albumId"
           onChange={(e) => setAlbumId(e.target.value)}
           required >
           {albumIds.map(albumId => <option key={albumId} value={albumId}>{albumId}</option>)}
         </select>
-        
+
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit">{song ? "Update" : "Create"}</button>
     </form>
   );
 }
 
-export default CreateSongForm;
+export default SongForm;

@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import './CreateAlbumForm.css'
 import { createTheAlbum } from "../../store/album";
 
-
 const CreateAlbumForm = ({ setFormStatus, formStatus }) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
@@ -95,16 +94,6 @@ const CreateAlbumForm = ({ setFormStatus, formStatus }) => {
           required
         />
       </div>
-
-      {/* <label>
-        Album Title
-        <input
-          type="text"
-          value={albumTitle}
-          onChange={(e) => setAlbumTitle(e.target.value)}
-          required
-        />
-      </label> */}
       <button type="submit">Submit</button>
     </form>
   );
