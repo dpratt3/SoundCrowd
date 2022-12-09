@@ -42,48 +42,60 @@ const CreateAlbumForm = ({ setFormStatus, formStatus }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{ maxWidth: 300}}>
       <ul>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
       </ul>
+      <div className="form-item">
       <label>
         Title
+        </label>
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
         />
-      </label>
+      </div>
+
+      <div className="form-item">
       <label>
         Description
+        </label>
         <input
           type="text"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
         />
-      </label>
+      </div>
+
+      <div className="form-item">
       <label>
         Url
+        </label>
         <input
           type="text"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           required
         />
-      </label>
+     </div>
+
+     <div className="form-item">
       <label>
         ImageUrl
+        </label>
         <input
           type="text"
           value={imageUrl}
           onChange={(e) => setImageUrl(e.target.value)}
           required
         />
-      </label>
+      </div>
+
       {/* <label>
         Album Title
         <input

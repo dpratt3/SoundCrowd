@@ -29,3 +29,20 @@ button {
   display: inline-block;
   font-size: 12px;
 }
+
+.form-item{
+  display: flex;
+  margin: 4px;
+  align-items: left;
+  text-align: left;
+}
+
+.form-item label{
+  color: white;
+  width: 100px;
+}
+
+.form-item input{
+  height: 20px;
+  border-radius: 4px;
+}
