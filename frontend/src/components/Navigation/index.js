@@ -12,30 +12,43 @@ function Navigation({ isLoaded }) {
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <>
-        <ProfileButton user={sessionUser} />
-        <NavLink to="/songs">Songs </NavLink>
-        <NavLink to="/albums">Albums </NavLink>
-      </>
+      <div style={{
+        position: "relative",
+        display: "flex",
+      justifyContent: "space-between", alignItems: 'center', textAlign: "center"}}>
+        <div style={{display: "flex", alignItems: "center", justifyContent: 'center' , color: "#fff", fontWeight: "bold"}}>
+        <img src="/favicon.ico" style={{width: 40}}></img>
+        <p>SoundCrowd</p>
+        </div>
+        <NavLink className="nav-link" exact to="/">Home </NavLink>
+        <NavLink className="nav-link" to="/songs">Songs </NavLink>
+        <NavLink className="nav-link" to="/albums">Albums </NavLink>
+        <NavLink className="nav-link" to="/my-songs">My-Songs </NavLink>
+        <div style={{position: "relative"}}>
+        <ProfileButton style={{ position: "absolute", backgroundColor: "#333", color: "#fff", textDecoration: "none", display: "block"}} user={sessionUser} />
+        </div>
+      </div>
     );
   } else {
     sessionLinks = (
-      <>
-        <NavLink to="/login">Log In </NavLink>
-        <NavLink to="/signup">Sign Up </NavLink>
-        <NavLink to="/songs">Songs </NavLink>
+      <div style={{display: "flex", justifyContent: "space-between",alignItems: "center", textAlign: "center"}}>
+       <div style={{display: "flex", alignItems: "center", justifyContent: 'center' , color: "#fff", fontWeight: "bold"}}>
+        <img src="/favicon.ico" style={{width: 40}}></img>
+        <p>SoundCrowd</p>
+        </div>
+        <NavLink className="nav-link" exact to="/">Home </NavLink>
+        <NavLink className="nav-link" to="/login">Log In </NavLink>
+        <NavLink className="nav-link" to="/signup">Sign Up </NavLink>
+        <NavLink className="nav-link" to="/songs">Songs </NavLink>
         <DemoUserButton />
-      </>
+        </div>
     );
   }
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home </NavLink>
+    <div style={{backgroundColor: "#333",}}>
         {isLoaded && sessionLinks}
-      </li>
-    </ul>
+    </div>
   );
 }
 

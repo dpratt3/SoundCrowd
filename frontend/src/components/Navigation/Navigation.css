@@ -3,5 +3,12 @@
 }
 
 .profile-dropdown {
-  background-color: brown;
+  background-color: "#333";
+  
+}
+
+
+.nav-link {
+  color: #fff; 
+  text-decoration: none;
 }

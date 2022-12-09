@@ -2,15 +2,16 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import LoginFormPage from "./components/LoginFormPage";
-import SignupFormPage from "./components/SignupFormPage";
+import LoginFormPage from "./components/auth/LoginFormPage";
+import SignupFormPage from "./components/auth/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
-import SongsPage from "./components/SongsPage";
-import SingleSongPage from "./components/SingleSongPage"
-import EditSongForm from "./components/EditSongForm"
-import AlbumPage from "./components/AlbumsPage";
-import SingleAlbumPage from "./components/SingleAlbumPage"
+import SongsPage from "./components/song/SongsPage";
+import SingleSongPage from "./components/song/SingleSongPage"
+import AlbumPage from "./components/album/AlbumsPage";
+import SingleAlbumPage from "./components/album/SingleAlbumPage"
+import MySongsPage from "./components/song/MySongsPage";
+import Homepage from "./components/Homepage/Homepage"
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +27,9 @@ function App() {
         <Switch>
           <Route path='/songs/:songId/edit'>
             <SingleSongPage />
+          </Route>
+          <Route exact path="/my-songs">
+            <MySongsPage />
           </Route>
           <Route exact path="/songs">
             <SongsPage />
@@ -44,6 +48,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route exact path="/">
+            <Homepage />
           </Route>
         </Switch>
       )}
