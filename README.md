@@ -1,6 +1,44 @@
 # `SoundCrowd`
 
+## Introduction
+SoundCrowd seeks to mimic some of the features, functionality, and styling of its near-namesake, SoundCloud. 
+
+## List of Technologies
+### Frontend
+    * js-cookie
+    * react
+    * react-dom
+    * react-redux
+    * react-router-dom
+    * react-scripts
+    * redux
+    * redux-thunk
+
+### Backend
+    * bcryptjs
+    * cookie-parser
+    * cors
+    * csurf
+    * dotenv
+    * express
+    * express-async-errors
+    * express-validator
+    * helmet
+    * jsonwebtoken
+    * morgan
+    * mysql2
+    * per-env 
+    * sequelize
+    * sequelize-cli
+
+### Homepage
+![](frontend/images/homepage.png)
+
+###
+
+
 ## Database Schema Design
+
 
 ![](./dbdiagram/soundCrowd-diagram.png)
 
