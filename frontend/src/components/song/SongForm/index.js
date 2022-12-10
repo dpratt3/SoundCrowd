@@ -114,7 +114,7 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
 
       <div className="form-item">
         <label>
-          Url
+          Song URL
         </label>
         <input
           type="text"
@@ -126,7 +126,7 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
 
       <div className="form-item">
         <label>
-          ImageUrl
+          Image Url
         </label>
         <input
           type="text"
@@ -138,7 +138,7 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
 
       <div className="form-item">
         <label>
-          AlbumId
+          Album Title
         </label>
 
         <select
