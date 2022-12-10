@@ -6,8 +6,6 @@ import SongsGrid from "../SongsGrid/SongsGrid";
 import { useState } from "react";
 import SongForm from "../SongForm";
 
-
-
 const MySongsPage = () => {
     const sessionUser = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
@@ -36,7 +34,6 @@ const MySongsPage = () => {
                 </div>
             </div>
             <SongsGrid songs={allSongs}/>
-
         </>
      );     
 }

@@ -23,7 +23,7 @@ function Navigation({ isLoaded }) {
         <NavLink activeClassName="active-nav" className="nav-link" exact to="/">Home </NavLink>
         <NavLink activeClassName="active-nav" className="nav-link" to="/songs">Songs </NavLink>
         <NavLink activeClassName="active-nav" className="nav-link" to="/albums">Albums </NavLink>
-        <NavLink activeClassName="active-nav" className="nav-link" to="/my-songs">My-Songs </NavLink>
+        <NavLink activeClassName="active-nav" className="nav-link" to="/My Songs">My Songs </NavLink>
         <div style={{position: "relative"}}>
         <ProfileButton style={{ position: "absolute", backgroundColor: "#333", color: "#fff", textDecoration: "none", display: "block"}} user={sessionUser} />
         </div>
