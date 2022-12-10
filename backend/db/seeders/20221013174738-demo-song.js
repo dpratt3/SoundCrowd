@@ -83,7 +83,7 @@ module.exports = {
           title: "Tick",
           description: " A song about the past",
           url: "www.yesterday.com",
-          imageUrl: "http://i.imgur.com/LErzcUf.png"
+          imageUrl: "http://i.imgur.com/LErzcUf.png",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -93,7 +93,7 @@ module.exports = {
           title: "Tack",
           description: " A song about the past",
           url: "www.yesterday.com",
-          imageUrl: "https://wpimg.pixelied.com/blog/wp-content/uploads/2021/05/12051826/Jay-Som-by-Anak-Ko.jpg"
+          imageUrl: "https://wpimg.pixelied.com/blog/wp-content/uploads/2021/05/12051826/Jay-Som-by-Anak-Ko.jpg",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
