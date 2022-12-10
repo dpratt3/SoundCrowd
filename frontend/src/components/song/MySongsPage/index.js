@@ -33,7 +33,7 @@ const MySongsPage = () => {
 
                 </div>
             </div>
-            <SongsGrid songs={allSongs}/>
+            <SongsGrid songs={allSongs} desc={true}/>
         </>
      );     
 }
