@@ -13,7 +13,7 @@ const AlbumDetail = () => {
     const history = useHistory();
 
     const oneAlbum = useSelector((state) => state.album[albumId]);
-    const albumSongs = useSelector((state) => Object.values(state.song).filter(song => song.albumId === albumId));
+    const albumSongs = oneAlbum?.Songs
     const sessionUser = useSelector((state) => state.session.user);
 
     useEffect(() => {
@@ -39,7 +39,7 @@ const AlbumDetail = () => {
                 </div>
             </div>
             <div>
-                <img src={oneAlbum.imageUrl} style={{ maxWidth: 300, borderRadius: 4 }}></img>
+                <img src={oneAlbum.imageUrl} style={{ maxWidth: 300, borderRadius: 4 }} alt="description of image"></img>
             </div>
             <div style={{ display: "flex", alignItems: "center", marginTop: 4 }}>
                 {(oneAlbum.userId && sessionUser?.id && oneAlbum.userId === sessionUser?.id) && (

@@ -20,11 +20,9 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
   const [description, setDescription] = useState(song?.description);
   const [url, setUrl] = useState(song?.url);
   const [imageUrl, setImageUrl] = useState(song?.imageUrl)
-  const [albumId, setAlbumId] = useState(song?.albumId)
+  const [albumId, setAlbumId] = useState(null)
 
   const [errors, setErrors] = useState([]);
-
-
 
   useEffect(() => {
     dispatch(getAllAlbums())
@@ -33,9 +31,8 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-
-
-
+    const albumIdInt = albums.find(album => album.title === albumId)?.id
+    console.log(albumIdInt, ` <-------------------------- albumIdInt`)
     if (song) {
       const songEdits = {
         title,
@@ -64,7 +61,7 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
         description,
         url,
         imageUrl,
-        albumId: albumId
+        albumId: albumIdInt || null
       };
 
       await dispatch(createTheSong(newSong)).catch(
@@ -145,6 +142,7 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
           name="albumId"
           onChange={(e) => setAlbumId(e.target.value)}
           required >
+            <option selected value={null}>{"no album"}</option>
           {albums.map(album => <option key={album.albumId} value={album.albumId}>{album.title}</option>)}
         </select>
 
