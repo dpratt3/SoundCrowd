@@ -12,7 +12,7 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
   const dispatch = useDispatch();
   const { songId } = useParams();
   const sessionUser = useSelector((state) => state.session.user);
-  const albumIds = useSelector((state) => Object.values(state.album).filter(album => album.userId == sessionUser.id).map(album => album.id));
+  const albums = useSelector((state) => Object.values(state.album).filter(album => album.userId == sessionUser.id));
   const userId = sessionUser.id;
 
 
@@ -145,7 +145,7 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
           name="albumId"
           onChange={(e) => setAlbumId(e.target.value)}
           required >
-          {albumIds.map(albumId => <option key={albumId} value={albumId}>{albumId}</option>)}
+          {albums.map(album => <option key={album.albumId} value={album.albumId}>{album.title}</option>)}
         </select>
 
       </div>
