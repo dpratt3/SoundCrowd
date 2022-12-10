@@ -4,10 +4,12 @@ import "./SongsGrid.css";
 const SongsGrid = ({songs}) => {
     const history = useHistory();
     return (
-        <div style={{ margin: 20, display: "flex", flexWrap: "wrap", justifyContent: "space-around" }}>
+    
+        <div className="grid">
                 {songs && songs.length > 0 && songs.map((song) => {
                     return (
-                        <div key={song.id} onClick={() => history.push(`/songs/${song.id}`)} style={{ flex: "1 1 0", marginTop: 20 }}>
+                        
+                        <div key={song.id} className="gridtab" onClick={() => history.push(`/songs/${song.id}`)} >
                             <img src={song.imageUrl} className="song-image"></img>
 
                             <div style={{ fontSize: 12, fontWeight: "bold", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif" }}>

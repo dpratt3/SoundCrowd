@@ -28,10 +28,10 @@ const AlbumPage = () => {
                 )}
 
             </div>
-            <div style={{ margin: 20, display: "flex", flexWrap: "wrap", justifyContent: "space-between" }} >
+            <div className="grid">
                 {allAlbums && allAlbums.length > 0 && allAlbums.map((album) => {
                     return (
-                        <div key={album.id} onClick={() => history.push(`/albums/${album.id}`)}  style={{ flex: "1 1 0", marginTop: 20 }}>
+                        <div key={album.id} className="gridtab" onClick={() => history.push(`/albums/${album.id}`)} >
                             <img src={album.imageUrl} style={{ width: 200, height: 200 }}></img>
                                 <div style={{ fontSize: 12, fontWeight: "bold", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif" }}>
                                     {album.title}
