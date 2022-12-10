@@ -3,7 +3,7 @@
 ## Introduction
 SoundCrowd seeks to mimic some of the features, functionality, and styling of its near-namesake, SoundCloud. 
 
-## List of Technologies
+## Table of Technologies
 | Frontend           | Backend              |
 | ------------------ | -------------------- |
 |  js-cookie         | bcryptjs             |
