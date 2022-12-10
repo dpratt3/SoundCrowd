@@ -4,6 +4,8 @@ import { getAllAlbums } from '../../../store/album'
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import AlbumForm from "../AlbumForm";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFolderPlus } from '@fortawesome/free-solid-svg-icons'
 
 
 const AlbumPage = () => {
@@ -19,9 +21,11 @@ const AlbumPage = () => {
 
     return (
         <>
-            <div style={{ margin: 20}}>
+            <div style={{ margin: 20 }}>
                 {(sessionUser?.id) && (
-                    <button style={{marginBottom: 8, backgroundColor: "#ff5614"}} onClick={() => setFormStatus(!formStatus)}>Create Album</button>
+                    <button style={{ marginBottom: 8, backgroundColor: "#ff5614", fontSize: 16 }}
+                        onClick={() => setFormStatus(!formStatus)}>
+                        <FontAwesomeIcon icon={faFolderPlus} /> <span style={{ margin: "auto 8px" }}>Create Album</span></button>
                 )}
                 {(sessionUser?.id) && (formStatus) && (
                     <AlbumForm setFormStatus={setFormStatus} formStatus={formStatus} />
@@ -33,12 +37,12 @@ const AlbumPage = () => {
                     return (
                         <div key={album.id} className="gridtab" onClick={() => history.push(`/albums/${album.id}`)} >
                             <img src={album.imageUrl} style={{ width: 200, height: 200 }}></img>
-                                <div style={{ fontSize: 12, fontWeight: "bold", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif" }}>
-                                    {album.title}
-                                </div>
-                                <div style={{ fontSize: 10, fontWeight: "bold", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif" }}>
-                                    {album.description}
-                                </div>
+                            <div style={{ fontSize: 12, fontWeight: "bold", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif" }}>
+                                {album.title}
+                            </div>
+                            <div style={{ fontSize: 10, fontWeight: "bold", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif" }}>
+                                {album.description}
+                            </div>
                         </div>
                     )
                 })}
