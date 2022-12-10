@@ -44,12 +44,12 @@ const AlbumDetail = () => {
             </div>
             <div style={{ display: "flex", alignItems: "center", marginTop: 4 }}>
                 {(oneAlbum.userId && sessionUser?.id && oneAlbum.userId === sessionUser?.id) && (
-                    <button style={{ margin: 4, backgroundColor: "#a32b2b" }} onClick={() => setFormStatus(!formStatus)}>Edit</button>
+                    <button style={{ margin: 4, backgroundColor: "#ff5614" }} onClick={() => setFormStatus(!formStatus)}>Edit</button>
                 )}
 
 
                 {(!formStatus && oneAlbum.userId && sessionUser?.id && oneAlbum.userId === sessionUser?.id) && (
-                    <button style={{ margin: 4, backgroundColor: "#a32b2b" }} className="button" onClick={() => deleteAlbum(albumId)}>Delete</button>
+                    <button style={{ margin: 4, backgroundColor: "#ff5614" }} className="button" onClick={() => deleteAlbum(albumId)}>Delete</button>
                 )}
             </div>
             <div style={{ marginTop: 8 }}>

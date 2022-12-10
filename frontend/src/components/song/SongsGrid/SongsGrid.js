@@ -1,4 +1,5 @@
 import { useHistory } from "react-router-dom";
+import "./SongsGrid.css";
 
 const SongsGrid = ({songs}) => {
     const history = useHistory();
@@ -6,8 +7,8 @@ const SongsGrid = ({songs}) => {
         <div style={{ margin: 20, display: "flex", flexWrap: "wrap", justifyContent: "space-around" }}>
                 {songs && songs.length > 0 && songs.map((song) => {
                     return (
-                        <div key={song.id} onClick={() => history.push(`/songs/${song.id}`)} style={{ flex: "1 0 0 1", marginTop: 20 }}>
-                            <img src={song.imageUrl} style={{ width: 200, height: 200 }}></img>
+                        <div key={song.id} onClick={() => history.push(`/songs/${song.id}`)} style={{ flex: "1 1 0", marginTop: 20 }}>
+                            <img src={song.imageUrl} className="song-image"></img>
 
                             <div style={{ fontSize: 12, fontWeight: "bold", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif" }}>
                                 {song.title}

@@ -5,5 +5,18 @@ body{
 
 button {
     border-radius: 4px;
-    color: red
+}
+
+button[type=submit] {
+    background-color: #333 !important;
+}
+
+button:hover{
+    border: 2px solid #235a71;
+    background-color: #235a71 !important;
+}
+
+img:hover {
+    box-shadow: 5px 5px;
+    border: 2px solid grey;
 }

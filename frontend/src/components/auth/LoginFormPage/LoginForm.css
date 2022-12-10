@@ -1,6 +1,6 @@
 form {
   display: block;
-  background-color: #a32b2b;
+  background-color: #ff5614;
   padding: 20px;
   width: 540px;
   border-radius: 3px;
@@ -10,7 +10,7 @@ form {
 
 label {
   display: block;
-  background-color: #a32b2b;
+
   padding: 3px;
   width: 540px;
 }

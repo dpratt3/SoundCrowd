@@ -45,12 +45,12 @@ const SongDetail = () => {
                     <source src={oneSong.url}></source>
                 </audio>
                 {(oneSong.userId && sessionUser?.id && oneSong.userId === sessionUser?.id) && (
-                    <button style={{ margin: 4, backgroundColor: "#a32b2b" }} onClick={() => setFormStatus(!formStatus)}>Edit</button>
+                    <button style={{ margin: 4, backgroundColor: "#ff5614" }} onClick={() => setFormStatus(!formStatus)}>Edit</button>
                 )}
 
 
                 {(!formStatus && oneSong.userId && sessionUser?.id && oneSong.userId === sessionUser?.id) && (
-                    <button style={{ margin: 4, backgroundColor: "#a32b2b" }} className="button" onClick={() => deleteSong(songId)}>Delete</button>
+                    <button style={{ margin: 4, backgroundColor: "#ff5614" }} className="button" onClick={() => deleteSong(songId)}>Delete</button>
                 )}
             </div>
             <div style={{ marginTop: 8 }}>

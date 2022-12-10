@@ -21,7 +21,7 @@ const AlbumPage = () => {
         <>
             <div style={{ margin: 20}}>
                 {(sessionUser?.id) && (
-                    <button style={{marginBottom: 8, backgroundColor: "#a32b2b"}} onClick={() => setFormStatus(!formStatus)}>Create Album</button>
+                    <button style={{marginBottom: 8, backgroundColor: "#ff5614"}} onClick={() => setFormStatus(!formStatus)}>Create Album</button>
                 )}
                 {(sessionUser?.id) && (formStatus) && (
                     <AlbumForm setFormStatus={setFormStatus} formStatus={formStatus} />
@@ -31,7 +31,7 @@ const AlbumPage = () => {
             <div style={{ margin: 20, display: "flex", flexWrap: "wrap", justifyContent: "space-between" }} >
                 {allAlbums && allAlbums.length > 0 && allAlbums.map((album) => {
                     return (
-                        <div key={album.id} onClick={() => history.push(`/albums/${album.id}`)}  style={{ flex: "1 0 0", marginTop: 20 }}>
+                        <div key={album.id} onClick={() => history.push(`/albums/${album.id}`)}  style={{ flex: "1 1 0", marginTop: 20 }}>
                             <img src={album.imageUrl} style={{ width: 200, height: 200 }}></img>
                                 <div style={{ fontSize: 12, fontWeight: "bold", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif" }}>
                                     {album.title}

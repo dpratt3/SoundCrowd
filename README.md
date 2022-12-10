@@ -34,12 +34,8 @@ SoundCrowd seeks to mimic some of the features, functionality, and styling of it
 ### Homepage
 ![](frontend/images/homepage.png)
 
-###
-
 
 ## Database Schema Design
-
-
 ![](./dbdiagram/soundCrowd-diagram.png)
 
 ## API Documentation
