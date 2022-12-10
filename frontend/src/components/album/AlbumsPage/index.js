@@ -36,7 +36,7 @@ const AlbumPage = () => {
                 {allAlbums && allAlbums.length > 0 && allAlbums.map((album) => {
                     return (
                         <div key={album.id} className="gridtab" onClick={() => history.push(`/albums/${album.id}`)} >
-                            <img src={album.imageUrl} style={{ width: 200, height: 200 }}></img>
+                            <img src={album.imageUrl} style={{ width: 200, height: 200 }} alt="album cover art"></img>
                             <div style={{ fontSize: 12, fontWeight: "bold", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif" }}>
                                 {album.title}
                             </div>

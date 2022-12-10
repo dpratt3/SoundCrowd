@@ -11,7 +11,7 @@ import SongForm from "../SongForm";
 const MySongsPage = () => {
     const sessionUser = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
-    const allSongs = useSelector( (state) => Object.values(state.song).filter(song => song.userId == sessionUser.id));
+    const allSongs = useSelector( (state) => Object.values(state.song).filter(song => song.userId === sessionUser.id));
    
     const [formStatus, setFormStatus] = useState(false);
     

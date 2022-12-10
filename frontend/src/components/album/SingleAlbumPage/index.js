@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -14,7 +13,7 @@ const AlbumDetail = () => {
     const history = useHistory();
 
     const oneAlbum = useSelector((state) => state.album[albumId]);
-    const albumSongs = useSelector((state) => Object.values(state.song).filter(song => song.albumId == albumId));
+    const albumSongs = useSelector((state) => Object.values(state.song).filter(song => song.albumId === albumId));
     const sessionUser = useSelector((state) => state.session.user);
 
     useEffect(() => {

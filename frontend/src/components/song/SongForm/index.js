@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import './CreateForm.css'
 import { createTheSong } from "../../../store/songs";
@@ -12,7 +12,7 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
   const dispatch = useDispatch();
   const { songId } = useParams();
   const sessionUser = useSelector((state) => state.session.user);
-  const albums = useSelector((state) => Object.values(state.album).filter(album => album.userId == sessionUser.id));
+  const albums = useSelector((state) => Object.values(state.album).filter(album => album.userId === sessionUser.id));
   const userId = sessionUser.id;
 
 
@@ -75,7 +75,7 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
           }
         }
       );
-      if (errors.length == 0) {
+      if (errors.length === 0) {
 
         setFormStatus(!formStatus)
       }

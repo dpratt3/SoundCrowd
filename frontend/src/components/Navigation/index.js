@@ -17,7 +17,7 @@ function Navigation({ isLoaded }) {
         display: "flex",
       justifyContent: "space-between", alignItems: 'center', textAlign: "center"}}>
         <div style={{display: "flex", alignItems: "center", justifyContent: 'center' , color: "#fff", fontWeight: "bold"}}>
-        <img src="/favicon.ico" style={{width: 40}}></img>
+        <img src="/favicon.ico" style={{width: 40}} alt="favicon placeholder"></img>
         <p>SoundCrowd</p>
         </div>
         <NavLink activeClassName="active-nav" className="nav-link" exact to="/">Home </NavLink>
@@ -33,7 +33,7 @@ function Navigation({ isLoaded }) {
     sessionLinks = (
       <div style={{display: "flex", justifyContent: "space-between",alignItems: "center", textAlign: "center"}}>
        <div style={{display: "flex", alignItems: "center", justifyContent: 'center' , color: "#fff", fontWeight: "bold"}}>
-        <img src="/favicon.ico" style={{width: 40}}></img>
+        <img src="/favicon.ico" style={{width: 40}} alt="favicon placeholder"></img>
         <p>SoundCrowd</p>
         </div>
         <NavLink activeClassName="active-nav" className="nav-link" exact to="/">Home </NavLink>
