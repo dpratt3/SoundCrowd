@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import './CreateForm.css'
 import { createTheSong } from "../../../store/songs";
@@ -12,7 +12,7 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
   const dispatch = useDispatch();
   const { songId } = useParams();
   const sessionUser = useSelector((state) => state.session.user);
-  const albumIds = useSelector((state) => Object.values(state.album).filter(album => album.userId == sessionUser.id).map(album => album.id));
+  const albums = useSelector((state) => Object.values(state.album).filter(album => album.userId === sessionUser.id));
   const userId = sessionUser.id;
 
 
@@ -20,11 +20,9 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
   const [description, setDescription] = useState(song?.description);
   const [url, setUrl] = useState(song?.url);
   const [imageUrl, setImageUrl] = useState(song?.imageUrl)
-  const [albumId, setAlbumId] = useState(song?.albumId)
+  const [albumId, setAlbumId] = useState(null)
 
   const [errors, setErrors] = useState([]);
-
-
 
   useEffect(() => {
     dispatch(getAllAlbums())
@@ -33,9 +31,8 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-
-
-
+    const albumIdInt = albums.find(album => album.title === albumId)?.id
+    console.log(albumIdInt, ` <-------------------------- albumIdInt`)
     if (song) {
       const songEdits = {
         title,
@@ -64,7 +61,7 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
         description,
         url,
         imageUrl,
-        albumId: albumId
+        albumId: albumIdInt || null
       };
 
       await dispatch(createTheSong(newSong)).catch(
@@ -75,7 +72,7 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
           }
         }
       );
-      if (errors.length == 0) {
+      if (errors.length === 0) {
 
         setFormStatus(!formStatus)
       }
@@ -114,7 +111,7 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
 
       <div className="form-item">
         <label>
-          Url
+          Song URL
         </label>
         <input
           type="text"
@@ -126,7 +123,7 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
 
       <div className="form-item">
         <label>
-          ImageUrl
+          Image Url
         </label>
         <input
           type="text"
@@ -138,14 +135,15 @@ const SongForm = ({ song, setFormStatus, formStatus }) => {
 
       <div className="form-item">
         <label>
-          AlbumId
+          Album Title
         </label>
 
         <select
           name="albumId"
           onChange={(e) => setAlbumId(e.target.value)}
           required >
-          {albumIds.map(albumId => <option key={albumId} value={albumId}>{albumId}</option>)}
+            <option selected value={null}>{"no album"}</option>
+          {albums.map(album => <option key={album.albumId} value={album.albumId}>{album.title}</option>)}
         </select>
 
       </div>

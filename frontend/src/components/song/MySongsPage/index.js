@@ -6,12 +6,10 @@ import SongsGrid from "../SongsGrid/SongsGrid";
 import { useState } from "react";
 import SongForm from "../SongForm";
 
-
-
 const MySongsPage = () => {
     const sessionUser = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
-    const allSongs = useSelector( (state) => Object.values(state.song).filter(song => song.userId == sessionUser.id));
+    const allSongs = useSelector( (state) => Object.values(state.song).filter(song => song.userId === sessionUser.id));
    
     const [formStatus, setFormStatus] = useState(false);
     
@@ -24,7 +22,7 @@ const MySongsPage = () => {
             <div style={{ margin: 20}}>
                 <div>
                     {(sessionUser?.id) && (
-                        <button style={{marginBottom: 8, backgroundColor: "#a32b2b"}} onClick={() => {
+                        <button style={{marginBottom: 8, backgroundColor: "#ff5614"}} onClick={() => {
                             setFormStatus(!formStatus)
                         }
                         }>Create Song</button>
@@ -35,8 +33,7 @@ const MySongsPage = () => {
 
                 </div>
             </div>
-            <SongsGrid songs={allSongs}/>
-
+            <SongsGrid songs={allSongs} desc={true}/>
         </>
      );     
 }

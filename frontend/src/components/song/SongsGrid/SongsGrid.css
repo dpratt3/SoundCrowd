@@ -1,0 +1,18 @@
+
+.song-image{
+    width: 200px;
+    height: 200px;
+}
+
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.gridtab {
+    margin-top: 20px;
+    cursor: pointer;
+}

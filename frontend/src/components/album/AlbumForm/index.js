@@ -57,7 +57,7 @@ const AlbumForm = ({ album, setFormStatus, formStatus }) => {
       );
 
     }
-    if (errors.length == 0) {
+    if (errors.length === 0) {
       setFormStatus(!formStatus)
     }
   };

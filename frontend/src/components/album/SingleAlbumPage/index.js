@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -14,7 +13,7 @@ const AlbumDetail = () => {
     const history = useHistory();
 
     const oneAlbum = useSelector((state) => state.album[albumId]);
-    const albumSongs = useSelector((state) => Object.values(state.song).filter(song => song.albumId == albumId));
+    const albumSongs = oneAlbum?.Songs
     const sessionUser = useSelector((state) => state.session.user);
 
     useEffect(() => {
@@ -40,16 +39,16 @@ const AlbumDetail = () => {
                 </div>
             </div>
             <div>
-                <img src={oneAlbum.imageUrl} style={{ maxWidth: 300, borderRadius: 4 }}></img>
+                <img src={oneAlbum.imageUrl} style={{ maxWidth: 300, borderRadius: 4 }} alt="description of image"></img>
             </div>
             <div style={{ display: "flex", alignItems: "center", marginTop: 4 }}>
                 {(oneAlbum.userId && sessionUser?.id && oneAlbum.userId === sessionUser?.id) && (
-                    <button style={{ margin: 4, backgroundColor: "#a32b2b" }} onClick={() => setFormStatus(!formStatus)}>Edit</button>
+                    <button style={{ margin: 4, backgroundColor: "#ff5614" }} onClick={() => setFormStatus(!formStatus)}>Edit</button>
                 )}
 
 
                 {(!formStatus && oneAlbum.userId && sessionUser?.id && oneAlbum.userId === sessionUser?.id) && (
-                    <button style={{ margin: 4, backgroundColor: "#a32b2b" }} className="button" onClick={() => deleteAlbum(albumId)}>Delete</button>
+                    <button style={{ margin: 4, backgroundColor: "#ff5614" }} className="button" onClick={() => deleteAlbum(albumId)}>Delete</button>
                 )}
             </div>
             <div style={{ marginTop: 8 }}>

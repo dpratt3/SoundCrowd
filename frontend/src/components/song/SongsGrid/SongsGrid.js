@@ -1,13 +1,16 @@
 import { useHistory } from "react-router-dom";
+import "./SongsGrid.css";
 
-const SongsGrid = ({songs}) => {
+const SongsGrid = ({songs, desc}) => {
     const history = useHistory();
     return (
-        <div style={{ margin: 20, display: "flex", flexWrap: "wrap", justifyContent: "space-around" }}>
+    
+        <div className="grid">
                 {songs && songs.length > 0 && songs.map((song) => {
+                    if(desc){
                     return (
-                        <div key={song.id} onClick={() => history.push(`/songs/${song.id}`)} style={{ flex: "1 0 0 1", marginTop: 20 }}>
-                            <img src={song.imageUrl} style={{ width: 200, height: 200 }}></img>
+                        <div key={song.id} className="gridtab" onClick={() => history.push(`/songs/${song.id}`)} >
+                            <img src={song.imageUrl} className="song-image"></img>
 
                             <div style={{ fontSize: 12, fontWeight: "bold", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif" }}>
                                 {song.title}
@@ -17,6 +20,20 @@ const SongsGrid = ({songs}) => {
                             </div>
                         </div>
                     )
+                } else {
+                    return (
+                        <div key={song.id} className="gridtab" onClick={() => history.push(`/songs/${song.id}`)} >
+                            <img src={song.imageUrl} className="song-image"></img>
+
+                            <div style={{ fontSize: 12, fontWeight: "bold", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif" }}>
+                                {song.title}
+                            </div>
+                            {/* <div style={{ fontSize: 10, fontWeight: "bold", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif" }}>
+                                {song.description}
+                            </div> */}
+                        </div>
+                    )
+                }
                 })}
             </div>
     )

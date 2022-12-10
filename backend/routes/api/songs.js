@@ -206,21 +206,27 @@ router.post("/", requireAuth, async (req, res) => {
   }
 
   // See if album with specified ID exists
-  const album = await Album.findOne({
-    where: {
-      id: albumId,
-    },
-  });
+  // const album = await Album.findOne({
+  //   where: {
+  //     id: albumId,
+  //   },
+  // });
+  let album;
 
-  console.log(album);
   // if there is no album with id matching albumId, return error
-  if (!album && albumId !== null) {
+  if (albumId !== null) {
+    album = await Album.findOne({
+      where: {
+        id: albumId,
+      },
+    });
+    if(!album){
     return res.json({
       message: "Album couldn't be found",
       statusCode: 404,
     });
   }
-
+  }
   // no album id, no problem
   if (!albumId) {
     const song = await Song.create({
@@ -231,7 +237,7 @@ router.post("/", requireAuth, async (req, res) => {
       imageUrl: imageUrl,
       albumId: albumId,
     });
-
+    
     return res.json(song);
   }
 
@@ -249,6 +255,7 @@ router.post("/", requireAuth, async (req, res) => {
     return res.json(song);
   }
 });
+
 
 // Create a song for an album based on an album's id
 router.put("/:songId", requireAuth, async (req, res) => {
