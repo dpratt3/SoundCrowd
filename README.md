@@ -1,5 +1,10 @@
 # `SoundCrowd`
 
+| Syntax      | Description |
+| ----------- | ----------- |
+| Header      | Title       |
+| Paragraph   | Text        |
+
 ## Introduction
 SoundCrowd seeks to mimic some of the features, functionality, and styling of its near-namesake, SoundCloud. 
 
