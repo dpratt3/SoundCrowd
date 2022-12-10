@@ -38,8 +38,15 @@ function ProfileButton({ user }) {
         <i className="fas fa-user-circle" /> <span style={{ margin: "auto 4" }}>{user.username}</span>
       </button>
       {showMenu && (
-        <div className="profile-dropdown" style={{ padding: 10,color: "#fff", display: "flex", flexDirection: "column", position: "absolute", backgroundColor: "#333", width: 150, right: 0, top: 40, borderRadius:4  }}>
-
+        <div className="profile-dropdown" style={{ padding: 10,
+                                                   color: "#fff", 
+                                                   display: "flex", 
+                                                   flexDirection: "column", 
+                                                   position: "absolute", 
+                                                   backgroundColor: "#333", 
+                                                   width: 150, 
+                                                   right: 0, 
+                                                   top: 40, borderRadius: 4}}>
           <div>{user.email}</div>
           <hr style={{ width: "100%" }} />
 
