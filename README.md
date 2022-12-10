@@ -14,7 +14,7 @@ SoundCrowd seeks to mimic some of the features, functionality, and styling of it
 |  react-scripts     | express              |
 |  redux             | express-async-errors |
 |  redux-thunk       | express-validator    |
-|                    | helmet               |
+|  fontAwesome       | helmet               |
 |                    | morgan               |
 |                    | mysql2               |
 |                    | per-env              |
