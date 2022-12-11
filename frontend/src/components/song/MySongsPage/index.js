@@ -5,6 +5,8 @@ import { getAllSongs } from "../../../store/songs";
 import SongsGrid from "../SongsGrid/SongsGrid";
 import { useState } from "react";
 import SongForm from "../SongForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFolderPlus } from '@fortawesome/free-solid-svg-icons'
 
 const MySongsPage = () => {
     const sessionUser = useSelector((state) => state.session.user);
@@ -22,10 +24,8 @@ const MySongsPage = () => {
             <div style={{ margin: 20}}>
                 <div>
                     {(sessionUser?.id) && (
-                        <button style={{marginBottom: 8, backgroundColor: "#ff5614"}} onClick={() => {
-                            setFormStatus(!formStatus)
-                        }
-                        }>Create Song</button>
+                        <button style={{ marginBottom: 8, backgroundColor: "#ff5614", fontSize: 16 }} onClick={() => {
+                            setFormStatus(!formStatus)}}> <FontAwesomeIcon icon={faFolderPlus} /> <span style={{ margin: "auto 8px" }}></span> Create Song</button>
                     )}
                     {(sessionUser?.id) && (formStatus) && (
                         <SongForm setFormStatus={setFormStatus} formStatus={formStatus} />

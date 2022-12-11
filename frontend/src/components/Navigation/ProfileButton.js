@@ -50,7 +50,7 @@ function ProfileButton({ user }) {
           <div>{user.email}</div>
           <hr style={{ width: "100%" }} />
 
-          <div onClick={logout}>Log Out</div>
+          <button style={{ backgroundColor: "#ff5614"}}onClick={logout}>Log Out</button>
 
         </div>
       )}
