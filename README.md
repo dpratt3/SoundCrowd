@@ -1,7 +1,8 @@
 # `SoundCrowd`
 
 ## Introduction
-SoundCrowd seeks to mimic some of the features, functionality, and styling of its near-namesake, SoundCloud. 
+SoundCrowd seeks to mimic some of the features, functionality, and styling of its near-namesake, SoundCloud.
+
 
 ## Table of Technologies
 | Frontend           | Backend              |
@@ -25,6 +26,20 @@ SoundCrowd seeks to mimic some of the features, functionality, and styling of it
 ### Homepage
 ![](frontend/images/homepage.png)
 
+### Login
+![](frontend/images/login.png)
+
+### Sign Up 
+![](frontend/images/sign-up.png)
+
+### All Songs
+![](frontend/images/all-songs.png)
+
+### All Albums
+![](frontend/images/all-albums.png)
+
+### My Songs
+![](frontend/images/my-songs.png)
 
 ## Database Schema Design
 ![](./dbdiagram/soundCrowd-diagram.png)
