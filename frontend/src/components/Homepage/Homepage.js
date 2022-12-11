@@ -7,7 +7,7 @@ const Homepage = () => {
                 style={{ width: 800, height: 450, borderRadius: 4 }} alt="crowd of listeners" />
         </div>
             <div style={{ textAlign: "center",backgroundColor: "#333", marginTop: 8, color: "#fff" }}>
-                Souncloud Clone | Author : David Pratt
+                Soundcloud Clone | Author : David Pratt
             </div>
         </div>);
 }
