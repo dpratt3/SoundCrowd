@@ -28,7 +28,7 @@ function App() {
           <Route path='/songs/:songId/edit'>
             <SingleSongPage />
           </Route>
-          <Route exact path="/My Songs">
+          <Route exact path="/MySongs">
             <MySongsPage />
           </Route>
           <Route exact path="/songs">
