@@ -10,7 +10,7 @@ const SongsGrid = ({songs, desc}) => {
                     if(desc){
                     return (
                         <div key={song.id} className="gridtab" onClick={() => history.push(`/songs/${song.id}`)} >
-                            <img src={song.imageUrl} className="song-image"></img>
+                            <img src={song.imageUrl} type="link" className="song-image"></img>
 
                             <div style={{ fontSize: 12, fontWeight: "bold", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif" }}>
                                 {song.title}
@@ -23,7 +23,7 @@ const SongsGrid = ({songs, desc}) => {
                 } else {
                     return (
                         <div key={song.id} className="gridtab" onClick={() => history.push(`/songs/${song.id}`)} >
-                            <img src={song.imageUrl} className="song-image"></img>
+                            <img src={song.imageUrl} type="link" className="song-image"></img>
 
                             <div style={{ fontSize: 12, fontWeight: "bold", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif" }}>
                                 {song.title}

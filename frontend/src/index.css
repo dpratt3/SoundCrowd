@@ -17,7 +17,7 @@ button:hover{
     cursor: pointer;
 }
 
-img:hover {
+img[type="link"]:hover {
     box-shadow: 5px 5px;
     border: 2px solid grey;
 }
